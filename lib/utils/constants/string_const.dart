@@ -75,6 +75,9 @@ class StringConst {
   static const String seeCurrentEvents = 'See current events';
   static const String scanNewOperator = 'Scan new operator';
 
+  // * Current Events
+  static const String currentEvents = 'Current Events';
+
   // * Bottom Nav Labels
   static const String home = 'Home';
   static const String activity = 'Activity';
