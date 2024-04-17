@@ -4,16 +4,12 @@ import 'package:go_router/go_router.dart';
 import '../../core/presentation/pages/shell/shell_wrapper.dart';
 import '../../features/account/presentation/pages/account_page_wrapper.dart';
 import '../../features/activity/presentation/pages/activity_page_wrapper.dart';
-import '../../features/auth/presentation/pages/sign_up/sign_up_page_wrapper.dart';
 import '../../features/cart/presentation/pages/cart_page_wrapper.dart';
+import '../../features/current_events/presentation/pages/current_events_page_wrapper.dart';
 import '../../features/home/presentation/pages/home_page_wrapper.dart';
 import '../../features/initial/presentation/pages/initial_page_wrapper.dart';
-import '../../features/welcome/presentation/pages/welcome_page_wrapper.dart';
 import '../enums/enums.dart';
 import 'router_const.dart';
-
-// TODO: Issue Update =>  https://github.com/flutter/flutter/issues/99124
-// TODO: Error Page
 
 class AppGoRouter {
   AppGoRouter._();
@@ -41,35 +37,11 @@ class AppGoRouter {
         path: Pages.initial.routePath,
         name: Pages.initial.routeName,
         builder: (ctx, state) => const InitialPageWrapper(),
-      ),
-      GoRoute(
-        path: Pages.welcome.routePath,
-        name: Pages.welcome.routeName,
-        builder: (ctx, state) => const WelcomePageWrapper(),
         routes: [
           GoRoute(
-            path: Pages.signUp.routePath,
-            name: Pages.signUp.routeName,
-            builder: (ctx, state) => const SignUpPageWrapper(),
-            // routes: [
-            //   GoRoute(
-            //     path: 'email-verification',
-            //     name: RouterConst.emailVerificationRoute,
-            //     builder: (ctx, state) {
-            //       // extra - casting is important 👈
-            //       bool isFromSignup = state.extra as bool;
-
-            //       return EmailVerificationPageWrapper(
-            //         isFromSignup: isFromSignup,
-            //       );
-            //     },
-            //   ),
-            // ],
-          ),
-          GoRoute(
-            path: Pages.signIn.routePath,
-            name: Pages.signIn.routeName,
-            builder: (ctx, state) => const SignUpPageWrapper(),
+            path: Pages.currentEvents.routePath,
+            name: Pages.currentEvents.routeName,
+            builder: (ctx, state) => const CurrentEventsPageWrapper(),
           ),
         ],
       ),

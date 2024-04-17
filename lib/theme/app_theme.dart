@@ -101,10 +101,10 @@ class AppTheme {
   }) {
     return FilledButtonThemeData(
       style: FilledButton.styleFrom(
-        fixedSize: const Size.fromHeight(WidgetSize.s42),
+        fixedSize: const Size.fromHeight(WidgetSize.s56),
         textStyle: mainTextTheme.titleSmall,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(WidgetBorderRadius.border12),
+          borderRadius: BorderRadius.circular(WidgetBorderRadius.borderXL),
         ),
         padding: const EdgeInsets.symmetric(
           vertical: WidgetPadding.padding10,
@@ -120,10 +120,10 @@ class AppTheme {
   }) {
     return OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
-        fixedSize: const Size.fromHeight(WidgetSize.s42),
+        fixedSize: const Size.fromHeight(WidgetSize.s56),
         textStyle: mainTextTheme.titleSmall,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(WidgetBorderRadius.border12),
+          borderRadius: BorderRadius.circular(WidgetBorderRadius.borderXL),
         ),
         padding: const EdgeInsets.symmetric(
           vertical: WidgetPadding.padding10,
@@ -142,10 +142,10 @@ class AppTheme {
   }) {
     return TextButtonThemeData(
       style: TextButton.styleFrom(
-        fixedSize: const Size.fromHeight(WidgetSize.s42),
+        fixedSize: const Size.fromHeight(WidgetSize.s56),
         // textStyle: nunitoTextTheme.titleSmall,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(WidgetBorderRadius.border12),
+          borderRadius: BorderRadius.circular(WidgetBorderRadius.borderXL),
         ),
         padding: const EdgeInsets.symmetric(
           vertical: WidgetPadding.padding10,

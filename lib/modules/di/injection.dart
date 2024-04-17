@@ -2,7 +2,6 @@ import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/presentation/cubit/user_cubit.dart';
-import '../../features/auth/presentation/cubit/auth_cubit.dart';
 import '../../features/home/cubit/home_cubit.dart';
 import '../../features/product/data/data_source/product_mock_data_source.dart';
 import '../../features/product/data/repositories/product_repo_impl.dart';
@@ -19,7 +18,6 @@ final sl = GetIt.instance;
 
 Future<void> init() async {
   // * CUBITS
-  sl.registerFactory(() => AuthCubit());
   sl.registerFactory(() => UserCubit());
   sl.registerFactory(
     () => HomeCubit(

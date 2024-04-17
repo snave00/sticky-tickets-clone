@@ -3,6 +3,8 @@ class StringConst {
 
   // * Shared
   static const String appName = 'Sticky Tickets';
+  static const String sticky = 'Sticky';
+  static const String tickets = 'Tickets';
   static const String appVersion = 'v1.0.11.pre';
   static const String defaultIsarName = 'backup_data_v1';
   static const String isarVersion = 'v1.00';
@@ -68,6 +70,10 @@ class StringConst {
       'By using this app, you agree to our ';
   static const String termsOfUse = 'Terms of Use';
   static const String privacyPolicy = 'Privacy Policy';
+
+  // * Initial Page
+  static const String seeCurrentEvents = 'See current events';
+  static const String scanNewOperator = 'Scan new operator';
 
   // * Bottom Nav Labels
   static const String home = 'Home';

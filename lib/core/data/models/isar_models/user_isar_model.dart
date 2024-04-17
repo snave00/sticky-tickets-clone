@@ -1,8 +1,6 @@
 import 'package:isar/isar.dart';
 
-import '../../../../utils/extenstions/date_extension.dart';
 import '../../../../utils/helpers/isar/isar_helper.dart';
-import '../../../../utils/helpers/shared/date_time_helper.dart';
 import '../../../domain/entities/user_entity.dart';
 import '../../../domain/entities/user_settings_entity.dart';
 import 'user_settings_isar_model.dart';
@@ -37,11 +35,6 @@ part 'user_isar_model.g.dart';
 /// Make sure to add '?' in props [List<Object?>]
 /// * Need: copyWith(), empty(), toEntity()
 
-enum Entitlement {
-  basic,
-  premium,
-}
-
 @collection
 class UserIsarModel {
   // to use collection.getByYourId(),deleteByYourId() methods
@@ -55,22 +48,12 @@ class UserIsarModel {
 
   final String? name;
 
-  @Enumerated(EnumType.name)
-  final Entitlement? entitlement;
-
-  final DateTime? lastUpdated;
-
-  final DateTime? lastAutoSyncDate;
-
   final UserSettingsIsarModel? userSettings;
 
   UserIsarModel({
     this.userId,
     this.email,
     this.name,
-    this.entitlement,
-    this.lastUpdated,
-    this.lastAutoSyncDate,
     this.userSettings,
   });
 
@@ -78,18 +61,12 @@ class UserIsarModel {
     String? userId,
     String? email,
     String? name,
-    Entitlement? entitlement,
-    DateTime? lastUpdated,
-    DateTime? lastAutoSyncDate,
     UserSettingsIsarModel? userSettings,
   }) {
     return UserIsarModel(
       userId: userId ?? this.userId,
       email: email ?? this.email,
       name: name ?? this.name,
-      entitlement: entitlement ?? this.entitlement,
-      lastUpdated: lastUpdated ?? this.lastUpdated,
-      lastAutoSyncDate: lastAutoSyncDate ?? this.lastAutoSyncDate,
       userSettings: userSettings ?? this.userSettings,
     );
   }
@@ -99,9 +76,6 @@ class UserIsarModel {
       userId: '',
       email: '',
       name: '',
-      entitlement: Entitlement.basic,
-      lastUpdated: DateTimeHelper.getEmptyDateTime(),
-      lastAutoSyncDate: DateTimeHelper.getEmptyDateTime().removeTime,
       userSettings: UserSettingsIsarModel.empty(),
     );
   }
@@ -110,10 +84,6 @@ class UserIsarModel {
         userId: userId ?? '',
         email: email ?? '',
         name: name ?? '',
-        entitlement: entitlement ?? Entitlement.basic,
-        lastUpdated: lastUpdated ?? DateTimeHelper.getEmptyDateTime(),
-        lastAutoSyncDate:
-            lastAutoSyncDate ?? DateTimeHelper.getEmptyDateTime().removeTime,
         userSettings: userSettings?.toEntity() ?? UserSettingsEntity.empty(),
       );
 }

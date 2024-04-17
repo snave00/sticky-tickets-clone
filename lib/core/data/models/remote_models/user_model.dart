@@ -1,7 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../../utils/helpers/shared/date_time_helper.dart';
-import '../isar_models/user_isar_model.dart';
 import 'user_settings_model.dart';
 
 part 'user_model.freezed.dart';
@@ -58,9 +56,6 @@ class UserModel with _$UserModel {
     final String? userId,
     final String? email,
     final String? name,
-    final Entitlement? entitlement, // get from Revenue Cat backend
-    // final bool? isPremium,
-    final DateTime? lastUpdated,
     final UserSettingsModel? userSettings,
   }) = _UserModel;
 
@@ -69,8 +64,6 @@ class UserModel with _$UserModel {
       userId: '',
       email: '',
       name: '',
-      entitlement: Entitlement.basic,
-      lastUpdated: DateTimeHelper.getEmptyDateTime(),
       userSettings: UserSettingsModel.empty(),
     );
   }

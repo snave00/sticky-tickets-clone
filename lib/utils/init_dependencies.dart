@@ -13,9 +13,6 @@ Future<void> initDependencies() async {
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   await _setOrientation();
 
-  // * init revenue cat
-  // await RevenueCatModule().initPlatformState();
-
   // * init get_it service locator / dependency injection
   await di.init();
 
@@ -27,12 +24,6 @@ Future<void> initDependencies() async {
 
   // * initialize bloc observer
   Bloc.observer = AppBlocObserver();
-
-  // * initialize flutter_timezone
-  // await AppTimeZone().configureLocalTimeZone();
-
-  // * initialize flutter_local_notifications
-  // await NotifService().initNotification();
 
   // removeSplash();
 }

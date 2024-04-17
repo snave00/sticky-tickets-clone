@@ -10,26 +10,8 @@ class RouterFunc {
     context.goNamed(Pages.initial.routeName);
   }
 
-  static void goToWelcomePage({required BuildContext context}) {
-    context.goNamed(Pages.welcome.routeName);
-  }
-
-  static void goToSignUpPage({required BuildContext context}) {
-    context.goNamed(Pages.signUp.routeName);
-  }
-
-  static void goToSignInPage({required BuildContext context}) {
-    context.goNamed(Pages.signIn.routeName);
-  }
-
-  static void goToEmailVerificationPage({
-    required BuildContext context,
-    required bool isFromSignup,
-  }) {
-    context.goNamed(
-      Pages.emailVerification.routeName,
-      extra: isFromSignup,
-    );
+  static void goToCurrentEventsPage({required BuildContext context}) {
+    context.goNamed(Pages.currentEvents.routeName);
   }
 
   static void goToShellPage({
