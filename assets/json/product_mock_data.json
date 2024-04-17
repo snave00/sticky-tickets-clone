@@ -1,0 +1,257 @@
+[
+    {
+        "productId": "HOT001",
+        "productCategoryId": "hot_coffee",
+        "productName": "Cappuccino",
+        "productDesc": "Espresso with equal parts of steamed milk and milk foam.",
+        "productPrice": "90.00",
+        "productImage": "assets/images/dummy/cappucino.jpeg",
+        "isAvailable": true,
+        "isFavorite": false,
+        "isPopular": true,
+        "customizations": [
+            {
+                "option": "Size",
+                "choices": [
+                    "Small",
+                    "Regular",
+                    "Large"
+                ]
+            },
+            {
+                "option": "Sugar",
+                "choices": [
+                    "None",
+                    "Light",
+                    "Regular",
+                    "Extra"
+                ]
+            }
+        ],
+        "rating": "4.5"
+    },
+    {
+        "productId": "HOT002",
+        "productCategoryId": "hot_coffee",
+        "productName": "Caffe Latte",
+        "productDesc": "Espresso with steamed milk and a small amount of foam.",
+        "productPrice": "70.00",
+        "productImage": "assets/images/dummy/caffe_latte.jpeg",
+        "isAvailable": true,
+        "isFavorite": false,
+        "isPopular": true,
+        "customizations": [
+            {
+                "option": "Size",
+                "choices": [
+                    "Small",
+                    "Regular",
+                    "Large"
+                ]
+            },
+            {
+                "option": "Sugar",
+                "choices": [
+                    "None",
+                    "Light",
+                    "Regular",
+                    "Extra"
+                ]
+            }
+        ],
+        "rating": "4.3"
+    },
+    {
+        "productId": "HOT003",
+        "productCategoryId": "hot_coffee",
+        "productName": "Caffe Americano",
+        "productDesc": "Espresso diluted with hot water.",
+        "productPrice": "90.00",
+        "productImage": "assets/images/dummy/caffe_americano.jpeg",
+        "isAvailable": true,
+        "isFavorite": false,
+        "isPopular": true,
+        "customizations": [
+            {
+                "option": "Size",
+                "choices": [
+                    "Small",
+                    "Regular",
+                    "Large"
+                ]
+            },
+            {
+                "option": "Sugar",
+                "choices": [
+                    "None",
+                    "Light",
+                    "Regular",
+                    "Extra"
+                ]
+            }
+        ],
+        "rating": "4.2"
+    },
+    {
+        "productId": "ICE001",
+        "productCategoryId": "iced_coffee",
+        "productName": "Iced Caramel Macchiato",
+        "productDesc": "Espresso with vanilla syrup, milk, and caramel drizzle over ice.",
+        "productPrice": "80.00",
+        "productImage": "assets/images/dummy/caramel_macchiato.jpeg",
+        "isAvailable": true,
+        "isFavorite": false,
+        "isPopular": true,
+        "customizations": [
+            {
+                "option": "Size",
+                "choices": [
+                    "Regular",
+                    "Large"
+                ]
+            },
+            {
+                "option": "Sugar",
+                "choices": [
+                    "Regular",
+                    "Extra"
+                ]
+            }
+        ],
+        "rating": "4.6"
+    },
+    {
+        "productId": "ICE002",
+        "productCategoryId": "iced_coffee",
+        "productName": "Iced Mocha",
+        "productDesc": "Espresso with chocolate syrup, milk, and whipped cream over ice.",
+        "productPrice": "80.00",
+        "productImage": "assets/images/dummy/iced_mocha.jpeg",
+        "isAvailable": true,
+        "isFavorite": false,
+        "isPopular": true,
+        "customizations": [
+            {
+                "option": "Size",
+                "choices": [
+                    "Regular",
+                    "Large"
+                ]
+            },
+            {
+                "option": "Sugar",
+                "choices": [
+                    "Regular",
+                    "Extra"
+                ]
+            }
+        ],
+        "rating": "4.7"
+    },
+    {
+        "productId": "ICE003",
+        "productCategoryId": "iced_coffee",
+        "productName": "Cold Brew",
+        "productDesc": "Chilled coffee brewed with cold water for a smooth and rich flavor.",
+        "productPrice": "80.00",
+        "productImage": "assets/images/dummy/cold_brew.jpeg",
+        "isAvailable": true,
+        "isFavorite": false,
+        "isPopular": true,
+        "customizations": [
+            {
+                "option": "Size",
+                "choices": [
+                    "Regular",
+                    "Large"
+                ]
+            },
+            {
+                "option": "Sugar",
+                "choices": [
+                    "Regular",
+                    "Extra"
+                ]
+            }
+        ],
+        "rating": "4.4"
+    },
+    {
+        "productId": "PASTA001",
+        "productCategoryId": "pasta",
+        "productName": "Spaghetti Bolognese",
+        "productDesc": "Classic spaghetti with rich beef and tomato sauce.",
+        "productPrice": "150.00",
+        "productImage": "assets/images/dummy/spaghetti_bolognese.jpeg",
+        "isAvailable": true,
+        "isFavorite": false,
+        "isPopular": false,
+        "customizations": [],
+        "rating": "4.8"
+    },
+    {
+        "productId": "PASTA002",
+        "productCategoryId": "pasta",
+        "productName": "Penne Alfredo",
+        "productDesc": "Penne pasta in creamy Alfredo sauce topped with Parmesan cheese.",
+        "productPrice": "145.00",
+        "productImage": "assets/images/dummy/penne_alfredo.jpeg",
+        "isAvailable": true,
+        "isFavorite": false,
+        "isPopular": false,
+        "customizations": [],
+        "rating": "4.6"
+    },
+    {
+        "productId": "PASTA003",
+        "productCategoryId": "pasta",
+        "productName": "Vegetable Lasagna",
+        "productDesc": "Layers of pasta with vegetables, marinara sauce, and melted cheese.",
+        "productPrice": "200.00",
+        "productImage": "assets/images/dummy/vegetable_lasagna.jpeg",
+        "isAvailable": true,
+        "isFavorite": false,
+        "isPopular": false,
+        "customizations": [],
+        "rating": "4.7"
+    },
+    {
+        "productId": "BREAD001",
+        "productCategoryId": "bread",
+        "productName": "Sourdough Bread",
+        "productDesc": "Artisanal sourdough bread made with natural fermentation.",
+        "productPrice": "120.00",
+        "productImage": "assets/images/dummy/sourdough_bread.jpeg",
+        "isAvailable": true,
+        "isFavorite": false,
+        "isPopular": false,
+        "customizations": [],
+        "rating": "4.5"
+    },
+    {
+        "productId": "BREAD002",
+        "productCategoryId": "bread",
+        "productName": "French Baguette",
+        "productDesc": "Classic French baguette with a crispy crust and",
+        "productPrice": "100.00",
+        "productImage": "assets/images/dummy/french_baguette.jpeg",
+        "isAvailable": true,
+        "isFavorite": false,
+        "isPopular": false,
+        "customizations": [],
+        "rating": "4.4"
+    },
+    {
+        "productId": "BREAD003",
+        "productCategoryId": "bread",
+        "productName": "Whole Wheat Loaf",
+        "productDesc": "Nutritious whole wheat bread baked to perfection.",
+        "productPrice": "100.00",
+        "productImage": "assets/images/dummy/whole_wheat_loaf.jpeg",
+        "isAvailable": true,
+        "isFavorite": false,
+        "isPopular": false,
+        "customizations": [],
+        "rating": "4.3"
+    }
+]
