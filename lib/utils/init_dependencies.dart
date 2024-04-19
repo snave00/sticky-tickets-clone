@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -5,6 +6,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 import '../modules/bloc/app_bloc_observer.dart';
 import '../modules/di/injection.dart' as di;
+import '../modules/firebase/firebase_options.dart';
 import '../modules/isar/isar_database_service.dart';
 
 Future<void> initDependencies() async {
@@ -18,6 +20,11 @@ Future<void> initDependencies() async {
 
   // * wait it so sl<SharedPreferences>() will work on initIsar() properly
   await di.sl.allReady();
+
+  // * initialize firebase
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   // * init isar local db
   await IsarDatabaseService().initIsar();
