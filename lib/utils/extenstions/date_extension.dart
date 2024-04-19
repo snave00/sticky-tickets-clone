@@ -17,6 +17,17 @@ extension DateTimeExtension on DateTime {
     }
   }
 
+  String get formatDateWithTimeAndDay {
+    try {
+      final time = DateFormat.jm().format(this);
+      final formatted = DateFormat.yMMMMEEEEd().format(this);
+      return '$formatted, $time';
+    } catch (e) {
+      Log.logError(runtimeType.toString(), 'formatDate ${e.toString()}');
+      return '';
+    }
+  }
+
   // Format DateTime to Formatted String using intl package
   // Converts to February/Pebrero 01 depending on Locale
   String get formatDateWithoutYear {

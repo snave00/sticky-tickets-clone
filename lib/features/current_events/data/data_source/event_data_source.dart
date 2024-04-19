@@ -1,9 +1,13 @@
 import 'dart:convert';
 import 'dart:isolate';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 
+import '../../../../modules/firebase/firebase_const.dart';
 import '../../../../utils/constants/asset_const.dart';
+import '../../../../utils/helpers/network/network_handler.dart';
+import '../../../../utils/logs/custom_log.dart';
 import '../models/remote_models/event_model.dart';
 
 abstract class EventDataSource {
@@ -13,18 +17,29 @@ abstract class EventDataSource {
 }
 
 class EventDataSourceImpl implements EventDataSource {
+  final FirebaseFirestore firebaseFirestore;
+
+  EventDataSourceImpl({
+    required this.firebaseFirestore,
+  });
+
   @override
   Future<List<EventModel>> getEvents() async {
-    final String response = await rootBundle.loadString(
-      AssetConst.productMockData,
+    // internet is required
+    await NetworkHandler().checkNetworkConnectivity();
+
+    final collectionRef = firebaseFirestore.collection(
+      FirebaseConst.eventsCollection,
     );
 
-    // get events
-    final events = await Isolate.run(
-      () => getEventsMockData(response),
-    );
+    final docUser = await collectionRef.get();
+    final data = docUser.docs;
 
-    return events;
+    final eventsList = data.map((e) => EventModel.fromJson(e.data())).toList();
+
+    Log.logFireStoreCall(action: 'getEvents', result: eventsList);
+
+    return eventsList;
   }
 
   @override

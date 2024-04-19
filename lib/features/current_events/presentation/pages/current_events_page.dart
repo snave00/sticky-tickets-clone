@@ -6,6 +6,7 @@ import '../../../../core/presentation/widgets/pull_refresh/custom_pull_refresh.d
 import '../../../../core/presentation/widgets/spacing/spacing.dart';
 import '../../../../utils/constants/string_const.dart';
 import '../cubit/cubit/current_events_cubit.dart';
+import '../widgets/current_events_sliver_list.dart';
 
 class CurrentEventsPage extends StatelessWidget {
   const CurrentEventsPage({super.key});
@@ -29,7 +30,7 @@ class CurrentEventsPage extends StatelessWidget {
               Spacing.vertical(size: SpacingSize.l, isSliver: true),
 
               // current events list
-              // HomeProductCategories(),
+              CurrentEventsSliverList(),
               Spacing.vertical(size: SpacingSize.l, isSliver: true),
             ],
           ),

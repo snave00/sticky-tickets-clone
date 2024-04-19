@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -66,7 +67,9 @@ Future<void> init() async {
 
   // * DATA SOURCES
   sl.registerFactory<EventDataSource>(
-    () => EventDataSourceImpl(),
+    () => EventDataSourceImpl(
+      firebaseFirestore: sl(),
+    ),
   );
 
   sl.registerFactory<PromoMockDataSource>(
@@ -96,4 +99,7 @@ Future<void> init() async {
   sl.registerSingletonAsync<SharedPreferences>(() async {
     return await SharedPreferences.getInstance();
   });
+
+  // * FIREBASE
+  sl.registerFactory(() => FirebaseFirestore.instance);
 }
