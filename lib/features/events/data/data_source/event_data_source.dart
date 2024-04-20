@@ -36,7 +36,10 @@ class EventDataSourceImpl implements EventDataSource {
 
     if (eventType != EventType.all) {
       query = collectionRef
-          .where(FirebaseConst.eventType, isEqualTo: eventType)
+          .where(
+            FirebaseConst.eventType,
+            isEqualTo: eventType.title.toLowerCase(),
+          )
           .orderBy(FirebaseConst.date);
     }
 

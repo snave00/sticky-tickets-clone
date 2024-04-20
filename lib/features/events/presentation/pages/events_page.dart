@@ -8,7 +8,8 @@ import '../cubit/cubit/events_cubit.dart';
 import '../widgets/event_scaffold.dart';
 import '../widgets/event_search.dart';
 import '../widgets/event_sliver_app_bar.dart';
-import '../widgets/events_sliver_list.dart';
+import '../widgets/event_type/event_types.dart';
+import '../widgets/events_list/events_sliver_list.dart';
 
 class EventsPage extends StatefulWidget {
   const EventsPage({super.key});
@@ -53,6 +54,10 @@ class _EventsPageState extends State<EventsPage> {
 
                 // search bar
                 EventSearch(),
+                Spacing.vertical(size: SpacingSize.l, isSliver: true),
+
+                // event type categories
+                EventTypes(),
                 Spacing.vertical(size: SpacingSize.l, isSliver: true),
 
                 //  events list

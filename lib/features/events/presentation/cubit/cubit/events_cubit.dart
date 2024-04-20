@@ -72,6 +72,14 @@ class EventsCubit extends Cubit<EventsState> {
     );
   }
 
+  Future<void> selectEventType({required EventType eventType}) async {
+    emit(
+      state.copyWith(eventType: eventType),
+    );
+
+    await _getEvents();
+  }
+
   void setSelectedEventIndex({required int index}) {
     emit(state.copyWith(selectedEventIndex: _getTopIndex(topIndex: index)));
     // debugPrint('TOP INDEX: ${state.selectedEventIndex}');

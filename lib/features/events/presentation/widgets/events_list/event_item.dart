@@ -3,11 +3,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../../core/presentation/widgets/button/bouncing_button.dart';
+import '../../../../../core/presentation/widgets/image/custom_cached_network_image.dart';
 import '../../../../../core/presentation/widgets/spacing/spacing.dart';
+import '../../../../../utils/constants/string_const.dart';
 import '../../../../../utils/constants/widget_const.dart';
-import '../../../../core/presentation/widgets/image/custom_cached_network_image.dart';
-import '../../../../utils/constants/string_const.dart';
-import '../../domain/entities/event_entity.dart';
+import '../../../domain/entities/event_entity.dart';
 
 class EventItem extends StatelessWidget {
   final EventEntity event;

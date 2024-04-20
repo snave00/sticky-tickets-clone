@@ -80,6 +80,12 @@ class StringConst {
   static const String currentEvents = 'Current Events';
   static const String events = 'Events';
   static const String guests = 'Guests';
+  static const String all = 'All';
+  static const String party = 'Party';
+  static const String concert = 'Concert';
+  static const String movie = 'Movie';
+  static const String food = 'Food';
+  static const String comedy = 'Comedy';
 
   // * Bottom Nav Labels
   static const String home = 'Home';
@@ -91,7 +97,6 @@ class StringConst {
   static const String popular = 'Popular';
   static const String promos = 'Promos';
 
-  static const String all = 'All';
   static const String hotCoffee = 'Hot coffee';
   static const String icedCoffee = 'Iced coffee';
   static const String pasta = 'Pasta';
