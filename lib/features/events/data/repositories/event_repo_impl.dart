@@ -6,6 +6,7 @@ import '../../../../core/data/exceptions/cache_exception.dart';
 import '../../../../core/data/exceptions/network_exception.dart';
 import '../../../../core/domain/failures/failures.dart';
 import '../../../../utils/constants/error_const.dart';
+import '../../../../utils/enums/event_type_enum.dart';
 import '../../../../utils/logs/custom_log.dart';
 import '../../domain/entities/event_entity.dart';
 import '../../domain/repositories/event_repo.dart';
@@ -21,9 +22,11 @@ class EventRepoImpl implements EventRepo {
   });
 
   @override
-  Future<Either<Failure, List<EventEntity>>> getEvents() async {
+  Future<Either<Failure, List<EventEntity>>> getEvents({
+    required EventType eventType,
+  }) async {
     try {
-      final events = await eventDataSource.getEvents();
+      final events = await eventDataSource.getEvents(eventType: eventType);
 
       final eventsToEntity = events.map((event) => event.toEntity()).toList();
       final eventsToJson =

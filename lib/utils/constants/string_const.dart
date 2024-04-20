@@ -29,7 +29,7 @@ class StringConst {
   static const String deleted = 'Deleted';
   static const String viewAll = 'View all';
   static const String search = 'Search';
-  static const String searchCoffee = 'Search Coffee...';
+  static const String searchEvents = 'Search events...';
 
   // * Common Text
   static const String loading = 'Loading...';
@@ -64,6 +64,7 @@ class StringConst {
   static const String noPromosFound = 'No promos found';
   static const String noProductsFound = 'No products found';
   static const String noCategoriesFound = 'No categories found';
+  static const String noEventsFound = 'No events found';
 
   // * Terms & Privacy
   static const String termsPrivacyMessage =
@@ -78,6 +79,7 @@ class StringConst {
   // * Events
   static const String currentEvents = 'Current Events';
   static const String events = 'Events';
+  static const String guests = 'Guests';
 
   // * Bottom Nav Labels
   static const String home = 'Home';

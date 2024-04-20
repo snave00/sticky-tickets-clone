@@ -6,12 +6,13 @@ import 'package:flutter/services.dart';
 
 import '../../../../modules/firebase/firebase_const.dart';
 import '../../../../utils/constants/asset_const.dart';
+import '../../../../utils/enums/event_type_enum.dart';
 import '../../../../utils/helpers/network/network_handler.dart';
 import '../../../../utils/logs/custom_log.dart';
 import '../models/remote_models/event_model.dart';
 
 abstract class EventDataSource {
-  Future<List<EventModel>> getEvents();
+  Future<List<EventModel>> getEvents({required EventType eventType});
 
   Future<EventModel> getEvent({required String eventId});
 }
@@ -24,15 +25,22 @@ class EventDataSourceImpl implements EventDataSource {
   });
 
   @override
-  Future<List<EventModel>> getEvents() async {
+  Future<List<EventModel>> getEvents({required EventType eventType}) async {
     // internet is required
     await NetworkHandler().checkNetworkConnectivity();
 
-    final collectionRef = firebaseFirestore.collection(
+    var collectionRef = firebaseFirestore.collection(
       FirebaseConst.eventsCollection,
     );
+    var query = collectionRef.orderBy(FirebaseConst.date);
 
-    final docUser = await collectionRef.get();
+    if (eventType != EventType.all) {
+      query = collectionRef
+          .where(FirebaseConst.eventType, isEqualTo: eventType)
+          .orderBy(FirebaseConst.date);
+    }
+
+    final docUser = await query.get();
     final data = docUser.docs;
 
     final eventsList = data.map((e) => EventModel.fromJson(e.data())).toList();

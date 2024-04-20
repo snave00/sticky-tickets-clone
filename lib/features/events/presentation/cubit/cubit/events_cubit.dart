@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../../../core/domain/usecases/usecase.dart';
+import '../../../../../utils/enums/event_type_enum.dart';
 import '../../../domain/entities/event_entity.dart';
 import '../../../domain/usecases/get_event_usecase.dart';
 import '../../../domain/usecases/get_events_usecase.dart';
@@ -19,6 +19,8 @@ class EventsCubit extends Cubit<EventsState> {
   }) : super(EventsState(
           eventsStatus: EventsStatus.initial,
           events: [],
+          eventType: EventType.all,
+          selectedEventIndex: 0,
           event: EventEntity.empty(),
         ));
 
@@ -28,7 +30,7 @@ class EventsCubit extends Cubit<EventsState> {
 
   Future<void> _getEvents() async {
     _loadingEvents();
-    final result = await getEventsUseCase.call(NoParams());
+    final result = await getEventsUseCase.call(state.eventType);
     result.fold(
       (failure) => emit(
         state.copyWith(
@@ -68,6 +70,27 @@ class EventsCubit extends Cubit<EventsState> {
         );
       },
     );
+  }
+
+  void setSelectedEventIndex({required int index}) {
+    emit(state.copyWith(selectedEventIndex: _getTopIndex(topIndex: index)));
+    // debugPrint('TOP INDEX: ${state.selectedEventIndex}');
+  }
+
+  int _getTopIndex({required int topIndex}) {
+    final maxIndex = state.events.length - 1;
+
+    // index returns negative value
+    if (topIndex < 0) {
+      return 0;
+    }
+
+    // index returns more than the size of list
+    if (topIndex > maxIndex) {
+      return maxIndex;
+    }
+
+    return topIndex;
   }
 
   void _loadingEvents() {

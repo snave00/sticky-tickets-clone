@@ -171,8 +171,9 @@ class AppTheme {
           color: baseTheme.colorScheme.primary,
         ),
       ),
-      contentPadding: const EdgeInsets.all(
-        WidgetPadding.paddingS,
+      contentPadding: const EdgeInsets.symmetric(
+        horizontal: WidgetPadding.paddingM,
+        vertical: WidgetPadding.paddingM,
       ),
     );
   }

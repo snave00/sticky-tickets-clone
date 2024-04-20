@@ -68,7 +68,7 @@ class EventsSliverList extends StatelessWidget {
               emoji: StringConst.emptyStateIcon,
               emojiSize: EmojiSize.medium,
             ),
-            emptyStateText: StringConst.noCategoriesFound,
+            emptyStateText: StringConst.noEventsFound,
           ),
         ],
       ),

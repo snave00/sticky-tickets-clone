@@ -75,6 +75,7 @@ class WidgetSize {
   static const double s180 = 180.0;
   static const double s200 = 200.0;
   static const double s220 = 220.0;
+  static const double s400 = 400.0;
 
   static const double appBarHeight = 56.0;
 }

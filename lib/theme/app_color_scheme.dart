@@ -26,4 +26,5 @@ final darkColorScheme = ColorScheme.dark(
   tertiaryContainer: Colors.black87,
   onTertiaryContainer: Colors.white,
   inversePrimary: Colors.grey.shade300,
+  surfaceVariant: const Color(0xFF6e6e6e).withOpacity(0.3),
 );

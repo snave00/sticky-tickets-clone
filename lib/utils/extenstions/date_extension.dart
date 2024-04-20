@@ -19,11 +19,25 @@ extension DateTimeExtension on DateTime {
 
   String get formatDateWithTimeAndDay {
     try {
+      // sample: Saturday, April 20, 2024: 9:00 AM
       final time = DateFormat.jm().format(this);
       final formatted = DateFormat.yMMMMEEEEd().format(this);
       return '$formatted, $time';
     } catch (e) {
-      Log.logError(runtimeType.toString(), 'formatDate ${e.toString()}');
+      Log.logError(
+          runtimeType.toString(), 'formatDateWithTimeAndDay ${e.toString()}');
+      return '';
+    }
+  }
+
+  String get formatDateDayMonth {
+    try {
+      // sample: Saturday, April 20
+      final formatted = DateFormat.MMMMEEEEd().format(this);
+      return formatted;
+    } catch (e) {
+      Log.logError(
+          runtimeType.toString(), 'formatDateDayMonth ${e.toString()}');
       return '';
     }
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../utils/constants/string_const.dart';
+import '../../../../utils/extenstions/date_extension.dart';
 
 class EventSliverAppBar extends StatelessWidget {
   const EventSliverAppBar({
@@ -9,13 +10,23 @@ class EventSliverAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SliverAppBar(
+    final theme = Theme.of(context);
+
+    return SliverAppBar(
       title: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // date
-          Text(StringConst.events),
+          Text(
+            DateTime.now().formatDateDayMonth.toString().toUpperCase(),
+            style: theme.textTheme.bodyMedium,
+          ),
+
           // title
-          Text(StringConst.events)
+          Text(
+            StringConst.events,
+            style: theme.textTheme.headlineLarge,
+          )
         ],
       ),
       automaticallyImplyLeading: false,
