@@ -9,36 +9,16 @@ class RouterConst {
   /// Alternatively, you can use namedRoutes
   ///
 
-  // * Named Routes - make sure it's the same on path param in Go Router
-  // static const initialRoute = 'initial';
-  // static const welcomeRoute = 'welcome';
-  // static const signUpRoute = 'signUp';
-  // static const signInRoute = 'signIn';
-  // static const emailVerificationRoute = 'email-verification';
-
-  // bottom nav routes
-  // static const homeRoute = 'home';
-  // static const activityRoute = 'activity';
-  // static const cartRoute = 'cart';
-  // static const messagesRoute = 'messages';
-  // static const accountRoute = 'account';
-
   // * Query Params
   // used for root to determine if from manual login or auto login
   static const shellOrigin = 'shell-origin';
-
-  // used for displaying store detail
-  // static const storeId = 'store-id';
 }
 
 enum Pages {
   initial(routePath: '/', routeName: 'initial'),
-  welcome(routePath: '/welcome', routeName: 'welcome'),
 
-  // auth
-  signUp(routePath: 'signUp', routeName: 'signUp'),
-  signIn(routePath: 'signIn', routeName: 'signIn'),
-  emailVerification(routePath: '', routeName: 'email-verification'),
+  events(routePath: 'events', routeName: 'events'),
+  scanOperator(routePath: 'scanOperator', routeName: 'scanOperator'),
 
   // bottom nav
   home(routePath: '/home', routeName: 'home'),

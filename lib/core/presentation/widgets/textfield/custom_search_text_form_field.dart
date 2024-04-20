@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../theme/app_theme.dart';
-import '../../../../utils/constants/string_const.dart';
 import '../../../../utils/constants/widget_const.dart';
 import 'custom_text_form_field.dart';
 
 class CustomSearchTextFormField extends StatelessWidget {
   final TextEditingController? controller;
   final FocusNode? focusNode;
+  final String? hintText;
   final void Function(String)? onFieldSubmitted;
   final void Function(String value)? onChanged;
 
@@ -16,6 +16,7 @@ class CustomSearchTextFormField extends StatelessWidget {
     super.key,
     this.controller,
     this.focusNode,
+    this.hintText,
     this.onFieldSubmitted,
     required this.onChanged,
   });
@@ -36,10 +37,10 @@ class CustomSearchTextFormField extends StatelessWidget {
           child: FaIcon(
             FontAwesomeIcons.magnifyingGlass,
             size: WidgetSize.s16,
-            color: theme.colorScheme.onPrimaryContainer,
+            color: theme.colorScheme.inversePrimary,
           ),
         ),
-        hintText: StringConst.searchCoffee,
+        hintText: hintText,
         hintStyle: AppTheme.getTextFormFieldHintStyle(theme: theme),
       ),
       onFieldSubmitted: onFieldSubmitted,

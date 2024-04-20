@@ -3,6 +3,8 @@ class StringConst {
 
   // * Shared
   static const String appName = 'Sticky Tickets';
+  static const String sticky = 'Sticky';
+  static const String tickets = 'Tickets';
   static const String appVersion = 'v1.0.11.pre';
   static const String defaultIsarName = 'backup_data_v1';
   static const String isarVersion = 'v1.00';
@@ -27,7 +29,7 @@ class StringConst {
   static const String deleted = 'Deleted';
   static const String viewAll = 'View all';
   static const String search = 'Search';
-  static const String searchCoffee = 'Search Coffee...';
+  static const String searchEvents = 'Search events...';
 
   // * Common Text
   static const String loading = 'Loading...';
@@ -62,12 +64,28 @@ class StringConst {
   static const String noPromosFound = 'No promos found';
   static const String noProductsFound = 'No products found';
   static const String noCategoriesFound = 'No categories found';
+  static const String noEventsFound = 'No events found';
 
   // * Terms & Privacy
   static const String termsPrivacyMessage =
       'By using this app, you agree to our ';
   static const String termsOfUse = 'Terms of Use';
   static const String privacyPolicy = 'Privacy Policy';
+
+  // * Initial Page
+  static const String seeCurrentEvents = 'See current events';
+  static const String scanNewOperator = 'Scan new operator';
+
+  // * Events
+  static const String currentEvents = 'Current Events';
+  static const String events = 'Events';
+  static const String guests = 'Guests';
+  static const String all = 'All';
+  static const String party = 'Party';
+  static const String concert = 'Concert';
+  static const String movie = 'Movie';
+  static const String food = 'Food';
+  static const String comedy = 'Comedy';
 
   // * Bottom Nav Labels
   static const String home = 'Home';
@@ -79,7 +97,6 @@ class StringConst {
   static const String popular = 'Popular';
   static const String promos = 'Promos';
 
-  static const String all = 'All';
   static const String hotCoffee = 'Hot coffee';
   static const String icedCoffee = 'Iced coffee';
   static const String pasta = 'Pasta';

@@ -1,8 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/presentation/cubit/user_cubit.dart';
-import '../../features/auth/presentation/cubit/auth_cubit.dart';
+import '../../features/events/data/data_source/event_data_source.dart';
+import '../../features/events/data/repositories/event_repo_impl.dart';
+import '../../features/events/domain/repositories/event_repo.dart';
+import '../../features/events/domain/usecases/get_event_usecase.dart';
+import '../../features/events/domain/usecases/get_events_usecase.dart';
+import '../../features/events/presentation/cubit/cubit/events_cubit.dart';
 import '../../features/home/cubit/home_cubit.dart';
 import '../../features/product/data/data_source/product_mock_data_source.dart';
 import '../../features/product/data/repositories/product_repo_impl.dart';
@@ -19,8 +25,13 @@ final sl = GetIt.instance;
 
 Future<void> init() async {
   // * CUBITS
-  sl.registerFactory(() => AuthCubit());
   sl.registerFactory(() => UserCubit());
+  sl.registerFactory(
+    () => EventsCubit(
+      getEventUseCase: sl(),
+      getEventsUseCase: sl(),
+    ),
+  );
   sl.registerFactory(
     () => HomeCubit(
       getProductCategoriesUseCase: sl(),
@@ -30,6 +41,10 @@ Future<void> init() async {
   );
 
   // * USECASES
+  // events
+  sl.registerFactory(() => GetEventUseCase(eventRepo: sl()));
+  sl.registerFactory(() => GetEventsUseCase(eventRepo: sl()));
+
   // product
   sl.registerFactory(() => GetProductUseCase(productRepo: sl()));
   sl.registerFactory(() => GetProductsUseCase(productRepo: sl()));
@@ -39,6 +54,10 @@ Future<void> init() async {
   sl.registerFactory(() => GetPromosUseCase(promoRepo: sl()));
 
   // * REPOSITORIES
+  sl.registerFactory<EventRepo>(() => EventRepoImpl(
+        eventDataSource: sl(),
+      ));
+
   sl.registerFactory<PromoRepo>(() => PromoRepoImpl(
         promoMockDataSource: sl(),
       ));
@@ -46,7 +65,12 @@ Future<void> init() async {
         productMockDataSource: sl(),
       ));
 
-  // * DATA SOURCES LOCAL
+  // * DATA SOURCES
+  sl.registerFactory<EventDataSource>(
+    () => EventDataSourceImpl(
+      firebaseFirestore: sl(),
+    ),
+  );
 
   sl.registerFactory<PromoMockDataSource>(
     () => PromoMockDataSourceImpl(),
@@ -75,4 +99,7 @@ Future<void> init() async {
   sl.registerSingletonAsync<SharedPreferences>(() async {
     return await SharedPreferences.getInstance();
   });
+
+  // * FIREBASE
+  sl.registerFactory(() => FirebaseFirestore.instance);
 }

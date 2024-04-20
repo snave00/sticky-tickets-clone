@@ -1,8 +1,6 @@
-import '../../data/models/isar_models/user_isar_model.dart';
-import '../../../utils/extenstions/date_extension.dart';
-import '../../../utils/helpers/shared/date_time_helper.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../data/models/isar_models/user_isar_model.dart';
 import 'user_settings_entity.dart';
 
 part 'user_entity.freezed.dart';
@@ -52,10 +50,6 @@ class UserEntity with _$UserEntity {
     required final String userId,
     required final String email,
     required final String name,
-    // required final bool isEmailVerified, // get isEmailVerified in firebase
-    required final Entitlement entitlement, // only get in local and revenue cat
-    required final DateTime lastUpdated,
-    required final DateTime lastAutoSyncDate,
     required final UserSettingsEntity userSettings,
   }) = _UserEntity;
 
@@ -64,9 +58,6 @@ class UserEntity with _$UserEntity {
       userId: '',
       email: '',
       name: '',
-      entitlement: Entitlement.basic,
-      lastUpdated: DateTimeHelper.getEmptyDateTime(),
-      lastAutoSyncDate: DateTimeHelper.getEmptyDateTime().removeTime,
       userSettings: UserSettingsEntity.empty(),
     );
   }
@@ -75,9 +66,6 @@ class UserEntity with _$UserEntity {
         userId: userId,
         email: email,
         name: name,
-        entitlement: entitlement,
-        lastUpdated: lastUpdated,
-        lastAutoSyncDate: lastAutoSyncDate.removeTime,
         userSettings: userSettings.toIsarModel(),
       );
 

@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import '../../../../utils/constants/asset_const.dart';
 import '../../../../utils/constants/string_const.dart';
 import '../../../../utils/constants/widget_const.dart';
-import '../spacing/spacing.dart';
-import '../text/pro_label.dart';
 
 enum AppLogoType {
   logoOnly,
@@ -31,7 +29,6 @@ class AppLogo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final isDarkMode = theme.brightness == Brightness.dark;
 
     if (appLogoType == AppLogoType.logoOnly) {
       return _buildLogoOnly(theme: theme);
@@ -52,7 +49,7 @@ class AppLogo extends StatelessWidget {
     }
 
     if (appLogoType == AppLogoType.nameLogo) {
-      return _buildNameLogo(theme: theme, isDarkMode: isDarkMode);
+      return _buildNameLogo(theme: theme);
     }
 
     return Container();
@@ -148,21 +145,13 @@ class AppLogo extends StatelessWidget {
     );
   }
 
-  Widget _buildNameLogo({required ThemeData theme, required bool isDarkMode}) {
-    return Row(
-      children: [
-        SizedBox(
-          child: Text(
-            StringConst.goodMorning,
-            style: theme.textTheme.titleLarge?.copyWith(
-              color: theme.colorScheme.primary,
-            ),
-          ),
-        ),
-        if (showProLabel ?? false)
-          const Spacing.horizontal(size: SpacingSize.s),
-        if (showProLabel ?? false) const ProLabel(),
-      ],
+  Widget _buildNameLogo({required ThemeData theme}) {
+    const defaultSize = WidgetSize.s60;
+
+    return SizedBox(
+      width: size ?? defaultSize,
+      height: size ?? defaultSize,
+      child: _buildNamedLogoImage(),
     );
   }
 
@@ -176,5 +165,14 @@ class AppLogo extends StatelessWidget {
     //   AssetConst.icAppLogoSvg,
     //   alignment: Alignment.center,
     // );
+  }
+
+  Widget _buildNamedLogoImage() {
+    return const Image(
+      fit: BoxFit.fitHeight,
+      image: AssetImage(
+        AssetConst.icNamedLogoPrimary,
+      ),
+    );
   }
 }

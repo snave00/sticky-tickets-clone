@@ -16,8 +16,6 @@ abstract class UserLocalIsarDataSource {
   Future<void> updateUser({required UserIsarModel userIsarModel});
 
   Stream<void>? watchUser();
-
-  // Future<void> deleteUser({required String userId});
 }
 
 class UserLocalIsarDataSourceImpl implements UserLocalIsarDataSource {
@@ -61,7 +59,6 @@ class UserLocalIsarDataSourceImpl implements UserLocalIsarDataSource {
     await isar?.writeTxn(() async {
       await isar.userIsarModels.putByUserId(userIsarModel.copyWith(
         userId: userId,
-        lastUpdated: DateTime.now(),
       ));
     });
 
@@ -86,9 +83,7 @@ class UserLocalIsarDataSourceImpl implements UserLocalIsarDataSource {
 
     // insert & update. auto detect if insert or delete by id
     await isar?.writeTxn(() async {
-      await isar.userIsarModels.putByUserId(userIsarModel.copyWith(
-        lastUpdated: DateTime.now(),
-      ));
+      await isar.userIsarModels.putByUserId(userIsarModel);
     });
   }
 
@@ -99,22 +94,4 @@ class UserLocalIsarDataSourceImpl implements UserLocalIsarDataSource {
     final userChanged = isar?.userIsarModels.watchLazy();
     return userChanged;
   }
-
-  // @override
-  // Future<void> deleteUser({required String userId}) async {
-  //   await _isar?.writeTxn(() async {
-  //     await _isar?.userIsarModels.deleteByUserId(userId);
-  //   });
-  //   // TODO: If user deleted, delete also all data in other collections
-
-  //   // * 2 ways to delete
-  //   // 1. put using isarId. auto converts the userId to isarId hash
-  //   // - auto convert the userId to isarId hash so it knows what is the isarId to delete
-  //   // await _isar?.userIsarModels.delete(123);
-
-  //   // 2. delete user by using unique index using `@Index(unique: true, replace: true)`
-  //   // - used the deleteByUserId() from auto generated
-  //   // - only use this if your id is strictly unique
-  //   // ✅  await _isar?.userIsarModels.deleteByUserId(userId);
-  // }
 }
