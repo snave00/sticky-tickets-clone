@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -5,6 +6,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 import '../modules/bloc/app_bloc_observer.dart';
 import '../modules/di/injection.dart' as di;
+import '../modules/firebase/firebase_options.dart';
 import '../modules/isar/isar_database_service.dart';
 
 Future<void> initDependencies() async {
@@ -13,26 +15,22 @@ Future<void> initDependencies() async {
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   await _setOrientation();
 
-  // * init revenue cat
-  // await RevenueCatModule().initPlatformState();
-
   // * init get_it service locator / dependency injection
   await di.init();
 
   // * wait it so sl<SharedPreferences>() will work on initIsar() properly
   await di.sl.allReady();
 
+  // * initialize firebase
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   // * init isar local db
   await IsarDatabaseService().initIsar();
 
   // * initialize bloc observer
   Bloc.observer = AppBlocObserver();
-
-  // * initialize flutter_timezone
-  // await AppTimeZone().configureLocalTimeZone();
-
-  // * initialize flutter_local_notifications
-  // await NotifService().initNotification();
 
   // removeSplash();
 }

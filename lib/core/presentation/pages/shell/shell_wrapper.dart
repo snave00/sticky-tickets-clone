@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../features/auth/presentation/cubit/auth_cubit.dart';
 import '../../../../features/home/cubit/home_cubit.dart';
 import '../../../../modules/di/injection.dart';
 import '../../../../utils/helpers/shared/helper_state.func.dart';
@@ -33,16 +32,6 @@ class ShellWrapper extends StatelessWidget {
       ],
       child: MultiBlocListener(
         listeners: [
-          BlocListener<AuthCubit, AuthState>(
-            listener: (ctx, state) {
-              handleAuthState(
-                context: context,
-                theme: theme,
-                state: state,
-                isFromSplash: false,
-              );
-            },
-          ),
           BlocListener<UserCubit, UserState>(
             listener: (ctx, state) {
               handleUserState(context: context, theme: theme, state: state);

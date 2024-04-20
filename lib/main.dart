@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/presentation/cubit/user_cubit.dart';
-import 'features/auth/presentation/cubit/auth_cubit.dart';
 import 'l10n/l10n.dart';
 import 'modules/di/injection.dart';
 import 'theme/app_theme.dart';
@@ -23,7 +22,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (ctx) => sl<AuthCubit>()..authStateChanges()),
         BlocProvider(create: (ctx) => sl<UserCubit>()..init(context: context)),
       ],
       child: _buildMaterialApp(),
@@ -47,10 +45,6 @@ class MyApp extends StatelessWidget {
           localeResolutionCallback: L10n.setLocaleResolutionCallback(),
           localizationsDelegates: L10n.setLocalizationDelegate(),
           routerConfig: AppGoRouter.router,
-          // locale: languageState,
-          // onUnknownRoute: (settings) {
-          //   return MaterialPageRoute(builder: (ctx) => const ErrorPage());
-          // },
         );
       },
     );

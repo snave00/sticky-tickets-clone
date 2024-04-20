@@ -24,6 +24,9 @@ class AssetConst {
 
   // * PNG
   static const icAppLogoOnlyPng = '${pngPath}ic_app_logo_only.png';
+  static const icNamedLogoPrimary = '${pngPath}ic_named_logo_primary.png';
+  static const icNamedLogoLight = '${pngPath}ic_named_logo_light.png';
+  static const icNamedLogoDark = '${pngPath}ic_named_logo_dark.png';
   static const icAll = '${pngPath}ic_all.png';
 
   // * JSON
