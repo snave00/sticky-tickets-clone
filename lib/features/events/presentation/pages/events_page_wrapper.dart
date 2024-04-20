@@ -5,18 +5,18 @@ import '../../../../core/presentation/cubit/user_cubit.dart';
 import '../../../../modules/di/injection.dart';
 import '../../../../utils/helpers/shared/helper_func.dart';
 import '../../../../utils/helpers/shared/helper_state.func.dart';
-import '../cubit/cubit/current_events_cubit.dart';
-import 'current_events_page.dart';
+import '../cubit/cubit/events_cubit.dart';
+import 'events_page.dart';
 
-class CurrentEventsPageWrapper extends StatelessWidget {
-  const CurrentEventsPageWrapper({super.key});
+class EventsPageWrapper extends StatelessWidget {
+  const EventsPageWrapper({super.key});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
     return BlocProvider(
-      create: (ctx) => sl<CurrentEventsCubit>()..init(),
+      create: (ctx) => sl<EventsCubit>()..init(),
       child: MultiBlocListener(
         listeners: [
           BlocListener<UserCubit, UserState>(
@@ -24,7 +24,7 @@ class CurrentEventsPageWrapper extends StatelessWidget {
               handleUserState(context: context, theme: theme, state: state);
             },
           ),
-          BlocListener<CurrentEventsCubit, CurrentEventsState>(
+          BlocListener<EventsCubit, EventsState>(
             listener: (ctx, eventState) {
               handleEventState(
                 context: context,
@@ -34,7 +34,7 @@ class CurrentEventsPageWrapper extends StatelessWidget {
             },
           ),
         ],
-        child: const CurrentEventsPage(),
+        child: const EventsPage(),
       ),
     );
   }
@@ -42,25 +42,25 @@ class CurrentEventsPageWrapper extends StatelessWidget {
   void handleEventState({
     required BuildContext context,
     required ThemeData theme,
-    required CurrentEventsState state,
+    required EventsState state,
   }) async {
-    switch (state.currentEventsStatus) {
-      case CurrentEventsStatus.initial:
+    switch (state.eventsStatus) {
+      case EventsStatus.initial:
         return;
 
-      case CurrentEventsStatus.getEventsLoading:
+      case EventsStatus.getEventsLoading:
         return;
 
-      case CurrentEventsStatus.getEventsSuccess:
+      case EventsStatus.getEventsSuccess:
         return;
 
-      case CurrentEventsStatus.getEventLoading:
+      case EventsStatus.getEventLoading:
         return;
 
-      case CurrentEventsStatus.getEventSuccess:
+      case EventsStatus.getEventSuccess:
         return;
 
-      case CurrentEventsStatus.failure:
+      case EventsStatus.failure:
         showSnackBar(
           context: context,
           theme: theme,

@@ -11,6 +11,8 @@ final lightColorScheme = ColorScheme.light(
   primaryContainer: Colors.white,
   secondary: Colors.grey.shade100,
   tertiary: Colors.white,
+  tertiaryContainer: Colors.white,
+  onTertiaryContainer: Colors.black87,
   inversePrimary: Colors.grey.shade700,
 );
 
@@ -21,5 +23,7 @@ final darkColorScheme = ColorScheme.dark(
   primaryContainer: Colors.grey.shade800,
   secondary: Colors.grey.shade800,
   tertiary: Colors.white,
+  tertiaryContainer: Colors.black87,
+  onTertiaryContainer: Colors.white,
   inversePrimary: Colors.grey.shade300,
 );

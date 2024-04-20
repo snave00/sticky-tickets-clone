@@ -68,11 +68,11 @@ class InitialPage extends StatelessWidget {
       ),
       child: CustomFilledButton(
         style: FilledButton.styleFrom(
-          backgroundColor: theme.colorScheme.secondary,
-          foregroundColor: theme.colorScheme.inversePrimary,
+          backgroundColor: theme.colorScheme.tertiaryContainer,
+          foregroundColor: theme.colorScheme.onTertiaryContainer,
         ),
         onPressedCallback: () {
-          RouterFunc.goToCurrentEventsPage(context: context);
+          RouterFunc.goToEventsPage(context: context);
         },
         child: const Text(StringConst.seeCurrentEvents),
       ),
@@ -86,8 +86,8 @@ class InitialPage extends StatelessWidget {
       ),
       child: CustomFilledButton(
         style: FilledButton.styleFrom(
-          backgroundColor: theme.colorScheme.inversePrimary,
-          foregroundColor: theme.colorScheme.secondary,
+          backgroundColor: theme.colorScheme.onTertiaryContainer,
+          foregroundColor: theme.colorScheme.tertiaryContainer,
         ),
         onPressedCallback: () {},
         child: const Text(StringConst.scanNewOperator),

@@ -8,20 +8,20 @@ import '../../../../core/presentation/widgets/spacing/spacing.dart';
 import '../../../../utils/constants/string_const.dart';
 import '../../../../utils/constants/widget_const.dart';
 import '../../domain/entities/event_entity.dart';
-import '../cubit/cubit/current_events_cubit.dart';
+import '../cubit/cubit/events_cubit.dart';
 import 'event_item.dart';
 
-class CurrentEventsSliverList extends StatelessWidget {
-  const CurrentEventsSliverList({super.key});
+class EventsSliverList extends StatelessWidget {
+  const EventsSliverList({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CurrentEventsCubit, CurrentEventsState>(
+    return BlocBuilder<EventsCubit, EventsState>(
       builder: (ctx, state) {
-        final events = state.currentEvents;
-        final currentEventsStatus = state.currentEventsStatus;
+        final events = state.events;
+        final eventsStatus = state.eventsStatus;
 
-        if (currentEventsStatus == CurrentEventsStatus.getEventsLoading) {
+        if (eventsStatus == EventsStatus.getEventsLoading) {
           return _buildLoadingState();
         }
 

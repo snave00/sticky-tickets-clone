@@ -6,19 +6,19 @@ import '../../../domain/entities/event_entity.dart';
 import '../../../domain/usecases/get_event_usecase.dart';
 import '../../../domain/usecases/get_events_usecase.dart';
 
-part 'current_events_cubit.freezed.dart';
-part 'current_events_state.dart';
+part 'events_cubit.freezed.dart';
+part 'events_state.dart';
 
-class CurrentEventsCubit extends Cubit<CurrentEventsState> {
+class EventsCubit extends Cubit<EventsState> {
   final GetEventUseCase getEventUseCase;
   final GetEventsUseCase getEventsUseCase;
 
-  CurrentEventsCubit({
+  EventsCubit({
     required this.getEventUseCase,
     required this.getEventsUseCase,
-  }) : super(CurrentEventsState(
-          currentEventsStatus: CurrentEventsStatus.initial,
-          currentEvents: [],
+  }) : super(EventsState(
+          eventsStatus: EventsStatus.initial,
+          events: [],
           event: EventEntity.empty(),
         ));
 
@@ -32,15 +32,15 @@ class CurrentEventsCubit extends Cubit<CurrentEventsState> {
     result.fold(
       (failure) => emit(
         state.copyWith(
-          currentEventsStatus: CurrentEventsStatus.failure,
+          eventsStatus: EventsStatus.failure,
           errorMessage: failure.errorMessage,
         ),
       ),
       (success) {
         emit(
           state.copyWith(
-            currentEventsStatus: CurrentEventsStatus.getEventsSuccess,
-            currentEvents: success,
+            eventsStatus: EventsStatus.getEventsSuccess,
+            events: success,
             errorMessage: '',
           ),
         );
@@ -54,14 +54,14 @@ class CurrentEventsCubit extends Cubit<CurrentEventsState> {
     result.fold(
       (failure) => emit(
         state.copyWith(
-          currentEventsStatus: CurrentEventsStatus.failure,
+          eventsStatus: EventsStatus.failure,
           errorMessage: failure.errorMessage,
         ),
       ),
       (success) {
         emit(
           state.copyWith(
-            currentEventsStatus: CurrentEventsStatus.getEventSuccess,
+            eventsStatus: EventsStatus.getEventSuccess,
             event: success,
             errorMessage: '',
           ),
@@ -72,7 +72,7 @@ class CurrentEventsCubit extends Cubit<CurrentEventsState> {
 
   void _loadingEvents() {
     emit(state.copyWith(
-      currentEventsStatus: CurrentEventsStatus.getEventsLoading,
+      eventsStatus: EventsStatus.getEventsLoading,
       successMessage: '',
       errorMessage: '',
     ));
@@ -80,7 +80,7 @@ class CurrentEventsCubit extends Cubit<CurrentEventsState> {
 
   void _loadingEvent() {
     emit(state.copyWith(
-      currentEventsStatus: CurrentEventsStatus.getEventLoading,
+      eventsStatus: EventsStatus.getEventLoading,
       successMessage: '',
       errorMessage: '',
     ));

@@ -10,8 +10,8 @@ class RouterFunc {
     context.goNamed(Pages.initial.routeName);
   }
 
-  static void goToCurrentEventsPage({required BuildContext context}) {
-    context.goNamed(Pages.currentEvents.routeName);
+  static void goToEventsPage({required BuildContext context}) {
+    context.goNamed(Pages.events.routeName);
   }
 
   static void goToShellPage({

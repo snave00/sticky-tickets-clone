@@ -5,7 +5,7 @@ import '../../core/presentation/pages/shell/shell_wrapper.dart';
 import '../../features/account/presentation/pages/account_page_wrapper.dart';
 import '../../features/activity/presentation/pages/activity_page_wrapper.dart';
 import '../../features/cart/presentation/pages/cart_page_wrapper.dart';
-import '../../features/current_events/presentation/pages/current_events_page_wrapper.dart';
+import '../../features/events/presentation/pages/events_page_wrapper.dart';
 import '../../features/home/presentation/pages/home_page_wrapper.dart';
 import '../../features/initial/presentation/pages/initial_page_wrapper.dart';
 import '../enums/enums.dart';
@@ -39,9 +39,9 @@ class AppGoRouter {
         builder: (ctx, state) => const InitialPageWrapper(),
         routes: [
           GoRoute(
-            path: Pages.currentEvents.routePath,
-            name: Pages.currentEvents.routeName,
-            builder: (ctx, state) => const CurrentEventsPageWrapper(),
+            path: Pages.events.routePath,
+            name: Pages.events.routeName,
+            builder: (ctx, state) => const EventsPageWrapper(),
           ),
         ],
       ),

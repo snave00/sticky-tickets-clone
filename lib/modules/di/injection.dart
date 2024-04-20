@@ -3,12 +3,12 @@ import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/presentation/cubit/user_cubit.dart';
-import '../../features/current_events/data/data_source/event_data_source.dart';
-import '../../features/current_events/data/repositories/event_repo_impl.dart';
-import '../../features/current_events/domain/repositories/event_repo.dart';
-import '../../features/current_events/domain/usecases/get_event_usecase.dart';
-import '../../features/current_events/domain/usecases/get_events_usecase.dart';
-import '../../features/current_events/presentation/cubit/cubit/current_events_cubit.dart';
+import '../../features/events/data/data_source/event_data_source.dart';
+import '../../features/events/data/repositories/event_repo_impl.dart';
+import '../../features/events/domain/repositories/event_repo.dart';
+import '../../features/events/domain/usecases/get_event_usecase.dart';
+import '../../features/events/domain/usecases/get_events_usecase.dart';
+import '../../features/events/presentation/cubit/cubit/events_cubit.dart';
 import '../../features/home/cubit/home_cubit.dart';
 import '../../features/product/data/data_source/product_mock_data_source.dart';
 import '../../features/product/data/repositories/product_repo_impl.dart';
@@ -27,7 +27,7 @@ Future<void> init() async {
   // * CUBITS
   sl.registerFactory(() => UserCubit());
   sl.registerFactory(
-    () => CurrentEventsCubit(
+    () => EventsCubit(
       getEventUseCase: sl(),
       getEventsUseCase: sl(),
     ),

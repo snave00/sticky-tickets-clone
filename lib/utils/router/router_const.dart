@@ -17,7 +17,7 @@ class RouterConst {
 enum Pages {
   initial(routePath: '/', routeName: 'initial'),
 
-  currentEvents(routePath: 'currentEvents', routeName: 'currentEvents'),
+  events(routePath: 'events', routeName: 'events'),
   scanOperator(routePath: 'scanOperator', routeName: 'scanOperator'),
 
   // bottom nav

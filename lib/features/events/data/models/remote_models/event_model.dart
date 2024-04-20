@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../../../utils/helpers/shared/date_time_helper.dart';
 import '../../../domain/entities/event_entity.dart';
-import 'time_stamp_converter.dart';
+import '../../../../../utils/helpers/shared/time_stamp_converter.dart';
 
 part 'event_model.freezed.dart';
 part 'event_model.g.dart';
