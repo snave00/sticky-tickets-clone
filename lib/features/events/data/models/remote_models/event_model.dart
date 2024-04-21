@@ -21,10 +21,7 @@ class EventModel with _$EventModel {
     // <-- this is nullable, so the converter needs to handle null
     @TimestampOrNullConverter() final DateTime? date,
     final String? image,
-    final String? checkedInTotal,
-    final String? guestTotal,
     final String? colorHex,
-    final List<String>? guestList,
     @TimestampOrNullConverter() final DateTime? createdAt,
     @TimestampOrNullConverter() final DateTime? updatedAt,
   }) = _EventModel;
@@ -41,10 +38,7 @@ class EventModel with _$EventModel {
       venue: '',
       date: DateTimeHelper.getEmptyDateTime(),
       image: '',
-      checkedInTotal: '0',
-      guestTotal: '0',
       colorHex: '',
-      guestList: [],
       createdAt: DateTimeHelper.getEmptyDateTime(),
       updatedAt: DateTimeHelper.getEmptyDateTime(),
     );
@@ -58,10 +52,7 @@ class EventModel with _$EventModel {
         venue: venue ?? '',
         date: date ?? DateTimeHelper.getEmptyDateTime(),
         image: image ?? '',
-        checkedInTotal: checkedInTotal ?? '',
-        guestTotal: guestTotal ?? '',
         colorHex: colorHex ?? '',
-        guestList: guestList ?? [],
         createdAt: createdAt ?? DateTimeHelper.getEmptyDateTime(),
         updatedAt: updatedAt ?? DateTimeHelper.getEmptyDateTime(),
       );

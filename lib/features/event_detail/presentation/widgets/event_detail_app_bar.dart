@@ -47,7 +47,7 @@ class EventDetailAppBar extends StatelessWidget {
               final event = state.event;
               final eventDetailStatus = state.eventDetailStatus;
 
-              if (eventDetailStatus == EventDetailStatus.getEventLoading) {
+              if (eventDetailStatus == EventDetailStatus.loading) {
                 return _buildLoadingState();
               }
 

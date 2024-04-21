@@ -7,8 +7,11 @@ import '../../features/event_detail/presentation/cubit/event_detail_cubit.dart';
 import '../../features/events/data/data_source/event_data_source.dart';
 import '../../features/events/data/repositories/event_repo_impl.dart';
 import '../../features/events/domain/repositories/event_repo.dart';
+import '../../features/events/domain/usecases/get_checked_in_guests_total_usecase.dart';
 import '../../features/events/domain/usecases/get_event_usecase.dart';
 import '../../features/events/domain/usecases/get_events_usecase.dart';
+import '../../features/events/domain/usecases/get_guests_total_usecase.dart';
+import '../../features/events/domain/usecases/get_tickets_usecase.dart';
 import '../../features/events/presentation/cubit/cubit/events_cubit.dart';
 import '../../features/home/cubit/home_cubit.dart';
 import '../../features/product/data/data_source/product_mock_data_source.dart';
@@ -35,6 +38,9 @@ Future<void> init() async {
   sl.registerFactory(
     () => EventDetailCubit(
       getEventUseCase: sl(),
+      getTicketsUseCase: sl(),
+      getGuestsTotalUseCase: sl(),
+      getCheckedInGuestsTotalUseCase: sl(),
     ),
   );
   sl.registerFactory(
@@ -49,6 +55,9 @@ Future<void> init() async {
   // events
   sl.registerFactory(() => GetEventUseCase(eventRepo: sl()));
   sl.registerFactory(() => GetEventsUseCase(eventRepo: sl()));
+  sl.registerFactory(() => GetTicketsUseCase(eventRepo: sl()));
+  sl.registerFactory(() => GetGuestsTotalUseCase(eventRepo: sl()));
+  sl.registerFactory(() => GetCheckedInGuestsTotalUseCase(eventRepo: sl()));
 
   // product
   sl.registerFactory(() => GetProductUseCase(productRepo: sl()));

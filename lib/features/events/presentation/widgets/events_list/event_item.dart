@@ -5,7 +5,6 @@ import 'package:intl/intl.dart';
 import '../../../../../core/presentation/widgets/button/bouncing_button.dart';
 import '../../../../../core/presentation/widgets/image/custom_cached_network_image.dart';
 import '../../../../../core/presentation/widgets/spacing/spacing.dart';
-import '../../../../../utils/constants/string_const.dart';
 import '../../../../../utils/constants/widget_const.dart';
 import '../../../domain/entities/event_entity.dart';
 
@@ -130,8 +129,8 @@ class EventItem extends StatelessWidget {
         _buildVenue(theme: theme),
 
         // guests count
-        _buildGuests(theme: theme),
-        const Spacing.horizontal(size: SpacingSize.m),
+        // _buildGuests(theme: theme),
+        // const Spacing.horizontal(size: SpacingSize.m),
       ],
     );
   }
@@ -159,21 +158,20 @@ class EventItem extends StatelessWidget {
   }
 
   Widget _buildGuests({required ThemeData theme}) {
-    return Row(
+    return const Row(
       children: [
         // guest icon
-        const FaIcon(
+        FaIcon(
           FontAwesomeIcons.user,
           size: WidgetSize.s12,
         ),
-        const Spacing.horizontal(size: SpacingSize.s),
+        Spacing.horizontal(size: SpacingSize.s),
 
-        // venue
-        Text(
-          '${event.guestTotal} ${StringConst.guests}',
-          style: theme.textTheme.bodySmall,
-          textAlign: TextAlign.start,
-        ),
+        // Text(
+        //   '${event.guestTotal} ${StringConst.guests}',
+        //   style: theme.textTheme.bodySmall,
+        //   textAlign: TextAlign.start,
+        // ),
       ],
     );
   }

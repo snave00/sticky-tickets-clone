@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/presentation/widgets/pull_refresh/custom_pull_refresh.dart';
+import '../../../../core/presentation/widgets/spacing/spacing.dart';
 import '../cubit/event_detail_cubit.dart';
 import '../widgets/event_detail_app_bar.dart';
+import '../widgets/event_detail_guests.dart';
 import '../widgets/event_detail_scaffold.dart';
 import '../widgets/event_detail_venue_date.dart';
 
@@ -15,7 +17,8 @@ class EventDetailPage extends StatelessWidget {
     return EventDetailScaffold(
       body: CustomPullRefresh(
         onRefresh: () async {
-          return context.read<EventDetailCubit>().getEvent();
+          await context.read<EventDetailCubit>().refresh();
+          return;
         },
         child: const CustomScrollView(
           slivers: [
@@ -24,8 +27,10 @@ class EventDetailPage extends StatelessWidget {
 
             // venue and date
             EventDetailVenueDate(),
+            Spacing.vertical(size: SpacingSize.m, isSliver: true),
 
             // guest count
+            EventDetailGuests(),
 
             // guest list
           ],

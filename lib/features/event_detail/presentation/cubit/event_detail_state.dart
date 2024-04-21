@@ -4,8 +4,14 @@ part of 'event_detail_cubit.dart';
 class EventDetailState with _$EventDetailState {
   factory EventDetailState({
     required EventDetailStatus eventDetailStatus,
+    required GetTicketsStatus getTicketsStatus,
+    required GetGuestsTotalStatus getGuestsTotalStatus,
+    required GetCheckedInGuestsTotalStatus getCheckedInGuestsTotalStatus,
     required String eventId,
     required EventEntity event,
+    required List<TicketEntity> filteredTickets,
+    required int guestsTotal,
+    required int checkedInGuestsTotal,
     final String? successMessage,
     final String? errorMessage,
   }) = _EventDetailState;
@@ -13,7 +19,28 @@ class EventDetailState with _$EventDetailState {
 
 enum EventDetailStatus {
   initial,
-  getEventLoading,
-  getEventSuccess,
+  loading,
+  success,
+  failure,
+}
+
+enum GetTicketsStatus {
+  initial,
+  loading,
+  success,
+  failure,
+}
+
+enum GetGuestsTotalStatus {
+  initial,
+  loading,
+  success,
+  failure,
+}
+
+enum GetCheckedInGuestsTotalStatus {
+  initial,
+  loading,
+  success,
   failure,
 }

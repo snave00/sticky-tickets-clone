@@ -36,6 +36,16 @@ class EventDetailPageWrapper extends StatelessWidget {
                 theme: theme,
                 state: eventState,
               );
+              handleGuestsTotalState(
+                context: context,
+                theme: theme,
+                state: eventState,
+              );
+              handleCheckedInGuestsTotalState(
+                context: context,
+                theme: theme,
+                state: eventState,
+              );
             },
           ),
         ],
@@ -53,13 +63,91 @@ class EventDetailPageWrapper extends StatelessWidget {
       case EventDetailStatus.initial:
         return;
 
-      case EventDetailStatus.getEventLoading:
+      case EventDetailStatus.loading:
         return;
 
-      case EventDetailStatus.getEventSuccess:
+      case EventDetailStatus.success:
         return;
 
       case EventDetailStatus.failure:
+        showSnackBar(
+          context: context,
+          theme: theme,
+          isSuccess: false,
+          message: state.errorMessage ?? '',
+        );
+        return;
+    }
+  }
+
+  void handleTicketsState({
+    required BuildContext context,
+    required ThemeData theme,
+    required EventDetailState state,
+  }) async {
+    switch (state.getTicketsStatus) {
+      case GetTicketsStatus.initial:
+        return;
+
+      case GetTicketsStatus.loading:
+        return;
+
+      case GetTicketsStatus.success:
+        return;
+
+      case GetTicketsStatus.failure:
+        showSnackBar(
+          context: context,
+          theme: theme,
+          isSuccess: false,
+          message: state.errorMessage ?? '',
+        );
+        return;
+    }
+  }
+
+  void handleGuestsTotalState({
+    required BuildContext context,
+    required ThemeData theme,
+    required EventDetailState state,
+  }) async {
+    switch (state.getGuestsTotalStatus) {
+      case GetGuestsTotalStatus.initial:
+        return;
+
+      case GetGuestsTotalStatus.loading:
+        return;
+
+      case GetGuestsTotalStatus.success:
+        return;
+
+      case GetGuestsTotalStatus.failure:
+        showSnackBar(
+          context: context,
+          theme: theme,
+          isSuccess: false,
+          message: state.errorMessage ?? '',
+        );
+        return;
+    }
+  }
+
+  void handleCheckedInGuestsTotalState({
+    required BuildContext context,
+    required ThemeData theme,
+    required EventDetailState state,
+  }) async {
+    switch (state.getCheckedInGuestsTotalStatus) {
+      case GetCheckedInGuestsTotalStatus.initial:
+        return;
+
+      case GetCheckedInGuestsTotalStatus.loading:
+        return;
+
+      case GetCheckedInGuestsTotalStatus.success:
+        return;
+
+      case GetCheckedInGuestsTotalStatus.failure:
         showSnackBar(
           context: context,
           theme: theme,

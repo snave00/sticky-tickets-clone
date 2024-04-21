@@ -50,6 +50,9 @@ class EventDetailVenueDate extends StatelessWidget {
                     Text(event.date.formatDateWithTimeAndDay),
                   ],
                 ),
+                const Spacing.vertical(size: SpacingSize.xs),
+
+                const Divider(),
               ],
             ),
           );

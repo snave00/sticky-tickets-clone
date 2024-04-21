@@ -87,6 +87,9 @@ class StringConst {
   static const String movie = 'Movie';
   static const String food = 'Food';
   static const String comedy = 'Comedy';
+  static const String checkedIn = 'Checked In';
+  static const String checkedInDesc = 'Number of people who\'ve checked in';
+  static const String sales = 'Sales';
 
   // * Bottom Nav Labels
   static const String home = 'Home';
