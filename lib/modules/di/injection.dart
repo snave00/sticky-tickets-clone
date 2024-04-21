@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/presentation/cubit/user_cubit.dart';
+import '../../features/event_detail/presentation/cubit/event_detail_cubit.dart';
 import '../../features/events/data/data_source/event_data_source.dart';
 import '../../features/events/data/repositories/event_repo_impl.dart';
 import '../../features/events/domain/repositories/event_repo.dart';
@@ -28,8 +29,12 @@ Future<void> init() async {
   sl.registerFactory(() => UserCubit());
   sl.registerFactory(
     () => EventsCubit(
-      getEventUseCase: sl(),
       getEventsUseCase: sl(),
+    ),
+  );
+  sl.registerFactory(
+    () => EventDetailCubit(
+      getEventUseCase: sl(),
     ),
   );
   sl.registerFactory(

@@ -5,18 +5,23 @@ import '../../../../core/presentation/cubit/user_cubit.dart';
 import '../../../../modules/di/injection.dart';
 import '../../../../utils/helpers/shared/helper_func.dart';
 import '../../../../utils/helpers/shared/helper_state.func.dart';
-import '../cubit/cubit/events_cubit.dart';
-import 'events_page.dart';
+import '../cubit/event_detail_cubit.dart';
+import 'event_detail_page.dart';
 
-class EventsPageWrapper extends StatelessWidget {
-  const EventsPageWrapper({super.key});
+class EventDetailPageWrapper extends StatelessWidget {
+  final String eventId;
+
+  const EventDetailPageWrapper({
+    super.key,
+    required this.eventId,
+  });
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
     return BlocProvider(
-      create: (ctx) => sl<EventsCubit>()..init(),
+      create: (ctx) => sl<EventDetailCubit>()..init(eventId: eventId),
       child: MultiBlocListener(
         listeners: [
           BlocListener<UserCubit, UserState>(
@@ -24,9 +29,9 @@ class EventsPageWrapper extends StatelessWidget {
               handleUserState(context: context, theme: theme, state: state);
             },
           ),
-          BlocListener<EventsCubit, EventsState>(
+          BlocListener<EventDetailCubit, EventDetailState>(
             listener: (ctx, eventState) {
-              handleEventState(
+              handleEventDetailState(
                 context: context,
                 theme: theme,
                 state: eventState,
@@ -34,27 +39,27 @@ class EventsPageWrapper extends StatelessWidget {
             },
           ),
         ],
-        child: const EventsPage(),
+        child: const EventDetailPage(),
       ),
     );
   }
 
-  void handleEventState({
+  void handleEventDetailState({
     required BuildContext context,
     required ThemeData theme,
-    required EventsState state,
+    required EventDetailState state,
   }) async {
-    switch (state.eventsStatus) {
-      case EventsStatus.initial:
+    switch (state.eventDetailStatus) {
+      case EventDetailStatus.initial:
         return;
 
-      case EventsStatus.getEventsLoading:
+      case EventDetailStatus.getEventLoading:
         return;
 
-      case EventsStatus.getEventsSuccess:
+      case EventDetailStatus.getEventSuccess:
         return;
 
-      case EventsStatus.failure:
+      case EventDetailStatus.failure:
         showSnackBar(
           context: context,
           theme: theme,

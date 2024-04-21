@@ -65,6 +65,7 @@ class StringConst {
   static const String noProductsFound = 'No products found';
   static const String noCategoriesFound = 'No categories found';
   static const String noEventsFound = 'No events found';
+  static const String noEventFound = 'No event found';
 
   // * Terms & Privacy
   static const String termsPrivacyMessage =

@@ -14,6 +14,20 @@ class RouterFunc {
     context.goNamed(Pages.events.routeName);
   }
 
+  static void goToEventDetail({
+    required BuildContext context,
+    required String eventId,
+  }) {
+    final Map<String, dynamic> queryParameters = <String, dynamic>{
+      RouterConst.eventId: eventId,
+    };
+
+    context.pushNamed(
+      Pages.eventDetail.routeName,
+      queryParameters: queryParameters,
+    );
+  }
+
   static void goToShellPage({
     required BuildContext context,
     required String shellOrigin,

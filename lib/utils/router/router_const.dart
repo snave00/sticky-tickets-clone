@@ -12,6 +12,9 @@ class RouterConst {
   // * Query Params
   // used for root to determine if from manual login or auto login
   static const shellOrigin = 'shell-origin';
+
+  // used for viewing event detail based on event id
+  static const eventId = 'event-id';
 }
 
 enum Pages {
@@ -19,6 +22,7 @@ enum Pages {
 
   events(routePath: 'events', routeName: 'events'),
   scanOperator(routePath: 'scanOperator', routeName: 'scanOperator'),
+  eventDetail(routePath: 'eventDetail', routeName: 'eventDetail'),
 
   // bottom nav
   home(routePath: '/home', routeName: 'home'),

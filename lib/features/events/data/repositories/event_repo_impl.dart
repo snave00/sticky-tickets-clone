@@ -58,19 +58,18 @@ class EventRepoImpl implements EventRepo {
     required String eventId,
   }) async {
     try {
-      final event = await eventDataSource.getEvent(
-        eventId: eventId,
-      );
+      final event = await eventDataSource.getEvent(eventId: eventId);
+      final eventEntity = event?.toEntity() ?? EventEntity.empty();
 
-      final eventToEntity = event.toEntity();
-      final eventToJson = eventToEntity.toJson();
+      final eventToJson = event?.toJson();
 
       Log.logRepo(
         repoName: runtimeTypeName,
         functionName: 'getEvent success: ',
         log: eventToJson,
       );
-      return right(eventToEntity);
+
+      return right(eventEntity);
     } on PlatformException catch (e) {
       return left(PlatformFailure(
           '${ErrorConst.platFormErrorMessage}. getEvent\n${e.toString()}'));
@@ -78,11 +77,11 @@ class EventRepoImpl implements EventRepo {
       return left(NetworkFailure(e.toString()));
     } on FirebaseException catch (e) {
       return left(FirebaseFailure(e.message.toString()));
-    } on CacheException catch (e) {
-      return left(CacheFailure(e.toString()));
     } catch (e) {
-      return left(GeneralFailure(
-          '${ErrorConst.generalErrorMessage}. getEvent\n${e.toString()}'));
+      return left(
+        GeneralFailure(
+            '${ErrorConst.generalErrorMessage} getEvent()\n${e.toString()}'),
+      );
     }
   }
 }

@@ -5,6 +5,7 @@ import '../../core/presentation/pages/shell/shell_wrapper.dart';
 import '../../features/account/presentation/pages/account_page_wrapper.dart';
 import '../../features/activity/presentation/pages/activity_page_wrapper.dart';
 import '../../features/cart/presentation/pages/cart_page_wrapper.dart';
+import '../../features/event_detail/presentation/pages/event_detail_page_wrapper.dart';
 import '../../features/events/presentation/pages/events_page_wrapper.dart';
 import '../../features/home/presentation/pages/home_page_wrapper.dart';
 import '../../features/initial/presentation/pages/initial_page_wrapper.dart';
@@ -42,6 +43,16 @@ class AppGoRouter {
             path: Pages.events.routePath,
             name: Pages.events.routeName,
             builder: (ctx, state) => const EventsPageWrapper(),
+          ),
+          GoRoute(
+            path: Pages.eventDetail.routePath,
+            name: Pages.eventDetail.routeName,
+            builder: (ctx, state) {
+              final eventId =
+                  state.uri.queryParameters[RouterConst.eventId] ?? '';
+
+              return EventDetailPageWrapper(eventId: eventId);
+            },
           ),
         ],
       ),
