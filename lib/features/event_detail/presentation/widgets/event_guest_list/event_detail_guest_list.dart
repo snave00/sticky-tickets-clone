@@ -7,6 +7,7 @@ import '../../../../../../core/presentation/widgets/progress/custom_circular_pro
 import '../../../../../../core/presentation/widgets/spacing/spacing.dart';
 import '../../../../../../utils/constants/string_const.dart';
 import '../../../../../../utils/constants/widget_const.dart';
+import '../../../../../utils/helpers/shared/helper_func.dart';
 import '../../../../ticket/domain/entities/ticket_entity.dart';
 import '../../cubit/event_detail_cubit.dart';
 import 'event_guest_item.dart';
@@ -48,14 +49,42 @@ class EventDetailGuestList extends StatelessWidget {
         },
         itemCount: guestList.length,
         itemBuilder: (ctx, index) {
-          final guest = guestList[index].guest;
-          final scannedAt = guestList[index].scannedAt;
-          final isScanned = guestList[index].isScanned;
+          final ticketEntity = guestList[index];
+          final ticketId = ticketEntity.ticketId;
+          final guest = ticketEntity.guest;
+          final scannedAt = ticketEntity.scannedAt;
+          final isScanned = ticketEntity.isScanned;
 
           return EventGuestItem(
             guestName: guest.guestName,
             scannedAt: scannedAt,
             isScanned: isScanned,
+            onTap: () async {
+              await showManualCheckInDialog(
+                context: context,
+                isNotCheckedIn: !isScanned,
+                ticketEntity: ticketEntity,
+                onYesPressed: (dialogContext) async {
+                  // already scanned, check out
+                  if (isScanned) {
+                    await context
+                        .read<EventDetailCubit>()
+                        .checkOutTicket(ticketId: ticketId);
+                  }
+
+                  // not yet scanned, check in
+                  if (context.mounted && !isScanned) {
+                    await context
+                        .read<EventDetailCubit>()
+                        .checkInTicket(ticketId: ticketId);
+                  }
+
+                  if (context.mounted) {
+                    Navigator.pop(context);
+                  }
+                },
+              );
+            },
           );
         },
       ),

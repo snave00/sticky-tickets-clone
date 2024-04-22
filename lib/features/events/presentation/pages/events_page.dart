@@ -64,7 +64,7 @@ class _EventsPageState extends State<EventsPage> {
                 EventsSliverList(),
                 Spacing.vertical(size: SpacingSize.l, isSliver: true),
 
-                SliverFillRemaining(),
+                // SliverFillRemaining(),
               ],
             ),
           ),

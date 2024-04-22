@@ -92,9 +92,17 @@ class StringConst {
   static const String date = 'Date';
   static const String guestHaveNotCheckedIn = 'Guest have not checked in';
   static const String guestList = 'Guest list';
+
+  // * Ticket
   static const String scanTicket = 'Scan ticket';
   static const String scanTicketSuccess = 'Scan ticket success';
   static const String ticketId = 'Ticket ID';
   static const String ticketName = 'Ticket name';
   static const String guestName = 'Guest name';
+  static const String manualCheckInGuest =
+      'Would you like to manually check in this guest?';
+  static const String manualCheckOutGuest =
+      'Would you like to manually check out this guest?';
+  static const String guestCheckInSuccess = 'Guest check in success';
+  static const String guestCheckOutSuccess = 'Guest check out success';
 }

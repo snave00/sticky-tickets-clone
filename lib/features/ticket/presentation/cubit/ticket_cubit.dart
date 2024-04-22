@@ -5,16 +5,16 @@ import 'package:mobile_scanner/mobile_scanner.dart';
 
 import '../../domain/entities/ticket_entity.dart';
 import '../../domain/params/scan_ticket_params.dart';
-import '../../domain/usecases/scan_ticket_usecase.dart';
+import '../../domain/usecases/check_in_ticket_usecase.dart';
 
 part 'ticket_cubit.freezed.dart';
 part 'ticket_state.dart';
 
 class TicketCubit extends Cubit<TicketState> {
-  final ScanTicketUseCase scanTicketUseCase;
+  final CheckInTicketUseCase checkInTicketUseCase;
 
   TicketCubit({
-    required this.scanTicketUseCase,
+    required this.checkInTicketUseCase,
   }) : super(TicketState(
           scanTicketStatus: ScanTicketStatus.initial,
           ticketEntity: TicketEntity.empty(),
@@ -36,7 +36,7 @@ class TicketCubit extends Cubit<TicketState> {
   }) async {
     _loadingScanTicket();
 
-    final result = await scanTicketUseCase.call(
+    final result = await checkInTicketUseCase.call(
       ScanTicketParams(
         ticketId: ticketId,
         eventId: state.eventId,

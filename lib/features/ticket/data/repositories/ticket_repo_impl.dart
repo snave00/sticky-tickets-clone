@@ -5,6 +5,7 @@ import 'package:fpdart/fpdart.dart';
 import '../../../../core/data/exceptions/cache_exception.dart';
 import '../../../../core/data/exceptions/network_exception.dart';
 import '../../../../core/domain/failures/failures.dart';
+import '../../../../core/domain/success/success.dart';
 import '../../../../utils/constants/error_const.dart';
 import '../../../../utils/logs/custom_log.dart';
 import '../../../ticket/data/data_source/ticket_data_source.dart';
@@ -21,7 +22,7 @@ class TicketRepoImpl implements TicketRepo {
   });
 
   @override
-  Future<Either<Failure, TicketEntity>> scanTicket({
+  Future<Either<Failure, TicketEntity>> checkInTicket({
     required String ticketId,
     required String eventId,
   }) async {
@@ -41,17 +42,17 @@ class TicketRepoImpl implements TicketRepo {
       }
 
       // scan ticket
-      await ticketDataSource.scanTicket(ticketId: ticketId);
+      await ticketDataSource.checkInTicket(ticketId: ticketId);
 
       Log.logRepo(
         repoName: runtimeTypeName,
-        functionName: 'scanTicket success: ',
+        functionName: 'checkInTicket success: ',
         log: ticketToJson,
       );
       return right(ticketEntity);
     } on PlatformException catch (e) {
       return left(PlatformFailure(
-          '${ErrorConst.platFormErrorMessage}. scanTicket\n${e.toString()}'));
+          '${ErrorConst.platFormErrorMessage}. checkInTicket\n${e.toString()}'));
     } on NetworkException catch (e) {
       return left(NetworkFailure(e.toString()));
     } on FirebaseException catch (e) {
@@ -60,7 +61,34 @@ class TicketRepoImpl implements TicketRepo {
       return left(CacheFailure(e.toString()));
     } catch (e) {
       return left(GeneralFailure(
-          '${ErrorConst.generalErrorMessage}. scanTicket\n${e.toString()}'));
+          '${ErrorConst.generalErrorMessage}. checkInTicket\n${e.toString()}'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Success>> checkOutTicket({
+    required String ticketId,
+  }) async {
+    try {
+      await ticketDataSource.checkOutTicket(ticketId: ticketId);
+
+      Log.logRepo(
+        repoName: runtimeTypeName,
+        functionName: 'checkOutTicket success: ',
+      );
+      return right(Success());
+    } on PlatformException catch (e) {
+      return left(PlatformFailure(
+          '${ErrorConst.platFormErrorMessage}. checkOutTicket\n${e.toString()}'));
+    } on NetworkException catch (e) {
+      return left(NetworkFailure(e.toString()));
+    } on FirebaseException catch (e) {
+      return left(FirebaseFailure(e.message.toString()));
+    } on CacheException catch (e) {
+      return left(CacheFailure(e.toString()));
+    } catch (e) {
+      return left(GeneralFailure(
+          '${ErrorConst.generalErrorMessage}. checkOutTicket\n${e.toString()}'));
     }
   }
 }

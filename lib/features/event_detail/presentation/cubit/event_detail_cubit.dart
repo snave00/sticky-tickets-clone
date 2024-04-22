@@ -7,6 +7,9 @@ import '../../../events/domain/usecases/get_event_usecase.dart';
 import '../../../events/domain/usecases/get_guests_total_usecase.dart';
 import '../../../events/domain/usecases/get_tickets_usecase.dart';
 import '../../../ticket/domain/entities/ticket_entity.dart';
+import '../../../ticket/domain/params/scan_ticket_params.dart';
+import '../../../ticket/domain/usecases/check_in_ticket_usecase.dart';
+import '../../../ticket/domain/usecases/check_out_ticket_usecase.dart';
 
 part 'event_detail_cubit.freezed.dart';
 part 'event_detail_state.dart';
@@ -16,17 +19,23 @@ class EventDetailCubit extends Cubit<EventDetailState> {
   final GetTicketsUseCase getTicketsUseCase;
   final GetGuestsTotalUseCase getGuestsTotalUseCase;
   final GetCheckedInGuestsTotalUseCase getCheckedInGuestsTotalUseCase;
+  final CheckInTicketUseCase checkInTicketUseCase;
+  final CheckOutTicketUseCase checkOutTicketUseCase;
 
   EventDetailCubit({
     required this.getEventUseCase,
     required this.getTicketsUseCase,
     required this.getGuestsTotalUseCase,
     required this.getCheckedInGuestsTotalUseCase,
+    required this.checkInTicketUseCase,
+    required this.checkOutTicketUseCase,
   }) : super(EventDetailState(
           eventDetailStatus: EventDetailStatus.initial,
           getTicketsStatus: GetTicketsStatus.initial,
           getGuestsTotalStatus: GetGuestsTotalStatus.initial,
           getCheckedInGuestsTotalStatus: GetCheckedInGuestsTotalStatus.initial,
+          checkedInTicketStatus: CheckedInTicketStatus.initial,
+          checkedOutTicketStatus: CheckedOutTicketStatus.initial,
           eventId: '',
           event: EventEntity.empty(),
           filteredTickets: [],
@@ -40,6 +49,7 @@ class EventDetailCubit extends Cubit<EventDetailState> {
   }
 
   Future<void> refresh() async {
+    _resetCheckInOutStatus();
     await _getEvent();
     _getTickets();
     await _getGuestsTotal();
@@ -135,6 +145,66 @@ class EventDetailCubit extends Cubit<EventDetailState> {
     );
   }
 
+  Future<void> checkInTicket({required String ticketId}) async {
+    _loadingCheckedIn();
+    final result = await checkInTicketUseCase.call(
+      ScanTicketParams(
+        ticketId: ticketId,
+        eventId: state.eventId,
+      ),
+    );
+    result.fold(
+      (failure) => emit(
+        state.copyWith(
+          checkedInTicketStatus: CheckedInTicketStatus.failure,
+          errorMessage: failure.errorMessage,
+        ),
+      ),
+      (success) async {
+        emit(
+          state.copyWith(
+            checkedInTicketStatus: CheckedInTicketStatus.success,
+            errorMessage: '',
+          ),
+        );
+
+        await refresh();
+      },
+    );
+  }
+
+  Future<void> checkOutTicket({required String ticketId}) async {
+    _loadingCheckedOut();
+    final result = await checkOutTicketUseCase.call(ticketId);
+    result.fold(
+      (failure) => emit(
+        state.copyWith(
+          checkedOutTicketStatus: CheckedOutTicketStatus.failure,
+          errorMessage: failure.errorMessage,
+        ),
+      ),
+      (success) async {
+        emit(
+          state.copyWith(
+            checkedOutTicketStatus: CheckedOutTicketStatus.success,
+            errorMessage: '',
+          ),
+        );
+
+        await refresh();
+      },
+    );
+  }
+
+  void _resetCheckInOutStatus() {
+    emit(
+      state.copyWith(
+        checkedInTicketStatus: CheckedInTicketStatus.initial,
+        checkedOutTicketStatus: CheckedOutTicketStatus.initial,
+      ),
+    );
+  }
+
   void _loadingEvent() {
     emit(state.copyWith(
       eventDetailStatus: EventDetailStatus.loading,
@@ -162,6 +232,22 @@ class EventDetailCubit extends Cubit<EventDetailState> {
   void _loadingCheckedInGuestsTotal() {
     emit(state.copyWith(
       getCheckedInGuestsTotalStatus: GetCheckedInGuestsTotalStatus.loading,
+      successMessage: '',
+      errorMessage: '',
+    ));
+  }
+
+  void _loadingCheckedIn() {
+    emit(state.copyWith(
+      checkedInTicketStatus: CheckedInTicketStatus.loading,
+      successMessage: '',
+      errorMessage: '',
+    ));
+  }
+
+  void _loadingCheckedOut() {
+    emit(state.copyWith(
+      checkedOutTicketStatus: CheckedOutTicketStatus.loading,
       successMessage: '',
       errorMessage: '',
     ));

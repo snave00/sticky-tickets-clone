@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/presentation/cubit/user_cubit.dart';
 import '../../../../modules/di/injection.dart';
+import '../../../../utils/constants/string_const.dart';
 import '../../../../utils/helpers/shared/helper_func.dart';
 import '../../../../utils/helpers/shared/helper_state.func.dart';
 import '../cubit/event_detail_cubit.dart';
@@ -42,6 +43,16 @@ class EventDetailPageWrapper extends StatelessWidget {
                 state: eventState,
               );
               handleCheckedInGuestsTotalState(
+                context: context,
+                theme: theme,
+                state: eventState,
+              );
+              handleCheckedInTicketState(
+                context: context,
+                theme: theme,
+                state: eventState,
+              );
+              handleCheckedOutTicketState(
                 context: context,
                 theme: theme,
                 state: eventState,
@@ -148,6 +159,70 @@ class EventDetailPageWrapper extends StatelessWidget {
         return;
 
       case GetCheckedInGuestsTotalStatus.failure:
+        showSnackBar(
+          context: context,
+          theme: theme,
+          isSuccess: false,
+          message: state.errorMessage ?? '',
+        );
+        return;
+    }
+  }
+
+  void handleCheckedInTicketState({
+    required BuildContext context,
+    required ThemeData theme,
+    required EventDetailState state,
+  }) async {
+    switch (state.checkedInTicketStatus) {
+      case CheckedInTicketStatus.initial:
+        return;
+
+      case CheckedInTicketStatus.loading:
+        return;
+
+      case CheckedInTicketStatus.success:
+        showSnackBar(
+          context: context,
+          theme: theme,
+          isSuccess: true,
+          message: StringConst.guestCheckInSuccess,
+        );
+        return;
+
+      case CheckedInTicketStatus.failure:
+        showSnackBar(
+          context: context,
+          theme: theme,
+          isSuccess: false,
+          message: state.errorMessage ?? '',
+        );
+        return;
+    }
+  }
+
+  void handleCheckedOutTicketState({
+    required BuildContext context,
+    required ThemeData theme,
+    required EventDetailState state,
+  }) async {
+    switch (state.checkedOutTicketStatus) {
+      case CheckedOutTicketStatus.initial:
+        return;
+
+      case CheckedOutTicketStatus.loading:
+        return;
+
+      case CheckedOutTicketStatus.success:
+        showSnackBar(
+          context: context,
+          theme: theme,
+          isSuccess: true,
+          message: StringConst.guestCheckOutSuccess,
+        );
+        return;
+
+      case CheckedOutTicketStatus.failure:
         showSnackBar(
           context: context,
           theme: theme,

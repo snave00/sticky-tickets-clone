@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../core/presentation/widgets/bottom_sheet/custom_bottom_sheet.dart';
 import '../../../core/presentation/widgets/progress/custom_circular_progress.dart';
+import '../../../features/event_detail/presentation/dialogs/manual_check_in_dialog.dart';
 import '../../../features/ticket/domain/entities/ticket_entity.dart';
 import '../../../features/ticket/presentation/bottom_sheet.dart/scan_ticket_result_bottom_sheet.dart';
 import '../../constants/widget_const.dart';
@@ -22,6 +23,25 @@ Future<void> showProgressDialog({required BuildContext context}) async {
         progressSize: ProgressSize.large,
       );
     },
+  );
+}
+
+// * Shows a alert dialog for manual checked in guest
+Future<void> showManualCheckInDialog({
+  required BuildContext context,
+  required bool isNotCheckedIn,
+  required TicketEntity ticketEntity,
+  required void Function(BuildContext dialogContext) onYesPressed,
+}) async {
+  await showDialog(
+    context: context,
+    builder: (builderContext) => ManualCheckInDialog(
+      isNotCheckedIn: isNotCheckedIn,
+      ticketEntity: ticketEntity,
+      onYesPressed: () {
+        onYesPressed(builderContext);
+      },
+    ),
   );
 }
 

@@ -16,7 +16,8 @@ import '../../features/events/presentation/cubit/cubit/events_cubit.dart';
 import '../../features/ticket/data/data_source/ticket_data_source.dart';
 import '../../features/ticket/data/repositories/ticket_repo_impl.dart';
 import '../../features/ticket/domain/repositories/ticket_repo.dart';
-import '../../features/ticket/domain/usecases/scan_ticket_usecase.dart';
+import '../../features/ticket/domain/usecases/check_in_ticket_usecase.dart';
+import '../../features/ticket/domain/usecases/check_out_ticket_usecase.dart';
 import '../../features/ticket/presentation/cubit/ticket_cubit.dart';
 
 final sl = GetIt.instance;
@@ -37,12 +38,14 @@ Future<void> init() async {
       getTicketsUseCase: sl(),
       getGuestsTotalUseCase: sl(),
       getCheckedInGuestsTotalUseCase: sl(),
+      checkInTicketUseCase: sl(),
+      checkOutTicketUseCase: sl(),
     ),
   );
 
   sl.registerFactory(
     () => TicketCubit(
-      scanTicketUseCase: sl(),
+      checkInTicketUseCase: sl(),
     ),
   );
 
@@ -57,7 +60,8 @@ Future<void> init() async {
   sl.registerFactory(() => GetCheckedInGuestsTotalUseCase(eventRepo: sl()));
 
   // ticket
-  sl.registerFactory(() => ScanTicketUseCase(ticketRepo: sl()));
+  sl.registerFactory(() => CheckInTicketUseCase(ticketRepo: sl()));
+  sl.registerFactory(() => CheckOutTicketUseCase(ticketRepo: sl()));
 
   // * REPOSITORIES
   sl.registerFactory<EventRepo>(() => EventRepoImpl(

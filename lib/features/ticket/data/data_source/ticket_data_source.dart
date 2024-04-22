@@ -15,7 +15,9 @@ abstract class TicketDataSource {
 
   Future<TicketModel?> getTicket({required String ticketId});
 
-  Future<void> scanTicket({required String ticketId});
+  Future<void> checkInTicket({required String ticketId});
+
+  Future<void> checkOutTicket({required String ticketId});
 }
 
 class TicketDataSourceImpl implements TicketDataSource {
@@ -66,7 +68,7 @@ class TicketDataSourceImpl implements TicketDataSource {
   }
 
   @override
-  Future<void> scanTicket({required String ticketId}) async {
+  Future<void> checkInTicket({required String ticketId}) async {
     // internet is required
     await NetworkHandler().checkNetworkConnectivity();
 
@@ -80,8 +82,28 @@ class TicketDataSourceImpl implements TicketDataSource {
       "scannedAt": Timestamp.now(),
     }).then(
       (value) => Log.logFireStoreCall(
-        action: 'scanTicket',
-        result: 'scan ticket success',
+        action: 'checkInTicket',
+        result: 'checkInTicket success',
+      ),
+    );
+  }
+
+  @override
+  Future<void> checkOutTicket({required String ticketId}) async {
+    // internet is required
+    await NetworkHandler().checkNetworkConnectivity();
+
+    var collectionRef = firebaseFirestore.collection(
+      FirebaseConst.ticketsCollection,
+    );
+
+    final doc = collectionRef.doc(ticketId);
+    await doc.update({
+      "isScanned": false,
+    }).then(
+      (value) => Log.logFireStoreCall(
+        action: 'checkOutTicket',
+        result: 'checkOutTicket success',
       ),
     );
   }

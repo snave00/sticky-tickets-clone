@@ -7,6 +7,8 @@ class EventDetailState with _$EventDetailState {
     required GetTicketsStatus getTicketsStatus,
     required GetGuestsTotalStatus getGuestsTotalStatus,
     required GetCheckedInGuestsTotalStatus getCheckedInGuestsTotalStatus,
+    required CheckedInTicketStatus checkedInTicketStatus,
+    required CheckedOutTicketStatus checkedOutTicketStatus,
     required String eventId,
     required EventEntity event,
     required List<TicketEntity> filteredTickets,
@@ -39,6 +41,20 @@ enum GetGuestsTotalStatus {
 }
 
 enum GetCheckedInGuestsTotalStatus {
+  initial,
+  loading,
+  success,
+  failure,
+}
+
+enum CheckedInTicketStatus {
+  initial,
+  loading,
+  success,
+  failure,
+}
+
+enum CheckedOutTicketStatus {
   initial,
   loading,
   success,

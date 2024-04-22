@@ -6,15 +6,15 @@ import '../entities/ticket_entity.dart';
 import '../params/scan_ticket_params.dart';
 import '../repositories/ticket_repo.dart';
 
-class ScanTicketUseCase implements UseCase<TicketEntity, ScanTicketParams> {
+class CheckInTicketUseCase implements UseCase<TicketEntity, ScanTicketParams> {
   final TicketRepo ticketRepo;
 
-  ScanTicketUseCase({required this.ticketRepo});
+  CheckInTicketUseCase({required this.ticketRepo});
 
   @override
   Future<Either<Failure, TicketEntity>> call(
       ScanTicketParams scanTicketParams) async {
-    return await ticketRepo.scanTicket(
+    return await ticketRepo.checkInTicket(
       ticketId: scanTicketParams.ticketId,
       eventId: scanTicketParams.eventId,
     );
