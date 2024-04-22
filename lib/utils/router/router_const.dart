@@ -22,7 +22,8 @@ enum Pages {
 
   events(routePath: 'events', routeName: 'events'),
   scanOperator(routePath: 'scanOperator', routeName: 'scanOperator'),
-  eventDetail(routePath: 'eventDetail', routeName: 'eventDetail');
+  eventDetail(routePath: 'eventDetail', routeName: 'eventDetail'),
+  scanTicket(routePath: 'scanTicket', routeName: 'scanTicket');
 
   const Pages({
     required this.routePath,

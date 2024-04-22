@@ -91,6 +91,10 @@ class StringConst {
   static const String venue = 'Venue';
   static const String date = 'Date';
   static const String guestHaveNotCheckedIn = 'Guest have not checked in';
-  static const String guestList = 'Guest List';
+  static const String guestList = 'Guest list';
   static const String scanTicket = 'Scan ticket';
+  static const String scanTicketSuccess = 'Scan ticket success';
+  static const String ticketId = 'Ticket ID';
+  static const String ticketName = 'Ticket name';
+  static const String guestName = 'Guest name';
 }

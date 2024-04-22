@@ -10,4 +10,5 @@ class FirebaseConst {
   static const String eventType = 'eventType';
   static const String eventId = 'eventId';
   static const String isScanned = 'isScanned';
+  static const String ticketId = 'ticketId';
 }

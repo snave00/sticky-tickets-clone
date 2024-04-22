@@ -51,7 +51,7 @@ class EventGuestItem extends StatelessWidget {
                 color: Colors.greenAccent,
               )
             : const FaIcon(
-                FontAwesomeIcons.qrcode,
+                FontAwesomeIcons.arrowRight,
                 color: Colors.amber,
               ),
       ),

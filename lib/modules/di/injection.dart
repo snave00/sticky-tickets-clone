@@ -13,6 +13,11 @@ import '../../features/events/domain/usecases/get_events_usecase.dart';
 import '../../features/events/domain/usecases/get_guests_total_usecase.dart';
 import '../../features/events/domain/usecases/get_tickets_usecase.dart';
 import '../../features/events/presentation/cubit/cubit/events_cubit.dart';
+import '../../features/ticket/data/data_source/ticket_data_source.dart';
+import '../../features/ticket/data/repositories/ticket_repo_impl.dart';
+import '../../features/ticket/domain/repositories/ticket_repo.dart';
+import '../../features/ticket/domain/usecases/scan_ticket_usecase.dart';
+import '../../features/ticket/presentation/cubit/ticket_cubit.dart';
 
 final sl = GetIt.instance;
 
@@ -35,6 +40,12 @@ Future<void> init() async {
     ),
   );
 
+  sl.registerFactory(
+    () => TicketCubit(
+      scanTicketUseCase: sl(),
+    ),
+  );
+
   // * USECASES
   // events
   sl.registerFactory(() => GetEventUseCase(eventRepo: sl()));
@@ -45,14 +56,27 @@ Future<void> init() async {
   sl.registerFactory(() => GetGuestsTotalUseCase(eventRepo: sl()));
   sl.registerFactory(() => GetCheckedInGuestsTotalUseCase(eventRepo: sl()));
 
+  // ticket
+  sl.registerFactory(() => ScanTicketUseCase(ticketRepo: sl()));
+
   // * REPOSITORIES
   sl.registerFactory<EventRepo>(() => EventRepoImpl(
         eventDataSource: sl(),
+        ticketDataSource: sl(),
+      ));
+
+  sl.registerFactory<TicketRepo>(() => TicketRepoImpl(
+        ticketDataSource: sl(),
       ));
 
   // * DATA SOURCES
   sl.registerFactory<EventDataSource>(
     () => EventDataSourceImpl(
+      firebaseFirestore: sl(),
+    ),
+  );
+  sl.registerFactory<TicketDataSource>(
+    () => TicketDataSourceImpl(
       firebaseFirestore: sl(),
     ),
   );

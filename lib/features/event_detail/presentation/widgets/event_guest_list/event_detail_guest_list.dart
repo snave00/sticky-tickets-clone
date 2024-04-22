@@ -7,7 +7,7 @@ import '../../../../../../core/presentation/widgets/progress/custom_circular_pro
 import '../../../../../../core/presentation/widgets/spacing/spacing.dart';
 import '../../../../../../utils/constants/string_const.dart';
 import '../../../../../../utils/constants/widget_const.dart';
-import '../../../../events/domain/entities/ticket_entity.dart';
+import '../../../../ticket/domain/entities/ticket_entity.dart';
 import '../../cubit/event_detail_cubit.dart';
 import 'event_guest_item.dart';
 

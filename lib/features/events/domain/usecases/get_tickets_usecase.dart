@@ -2,7 +2,7 @@ import 'package:fpdart/fpdart.dart';
 
 import '../../../../../core/domain/failures/failures.dart';
 import '../../../../core/domain/usecases/usecase.dart';
-import '../entities/ticket_entity.dart';
+import '../../../ticket/domain/entities/ticket_entity.dart';
 import '../repositories/event_repo.dart';
 
 class GetTicketsUseCase implements UseCase<List<TicketEntity>, String> {

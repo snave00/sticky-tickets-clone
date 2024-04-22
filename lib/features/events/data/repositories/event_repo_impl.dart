@@ -8,8 +8,9 @@ import '../../../../core/domain/failures/failures.dart';
 import '../../../../utils/constants/error_const.dart';
 import '../../../../utils/enums/event_type_enum.dart';
 import '../../../../utils/logs/custom_log.dart';
+import '../../../ticket/data/data_source/ticket_data_source.dart';
+import '../../../ticket/domain/entities/ticket_entity.dart';
 import '../../domain/entities/event_entity.dart';
-import '../../domain/entities/ticket_entity.dart';
 import '../../domain/repositories/event_repo.dart';
 import '../data_source/event_data_source.dart';
 
@@ -17,9 +18,11 @@ class EventRepoImpl implements EventRepo {
   static String runtimeTypeName = (EventRepoImpl).toString();
 
   final EventDataSource eventDataSource;
+  final TicketDataSource ticketDataSource;
 
   EventRepoImpl({
     required this.eventDataSource,
+    required this.ticketDataSource,
   });
 
   @override
@@ -91,7 +94,7 @@ class EventRepoImpl implements EventRepo {
     required String eventId,
   }) async {
     try {
-      final tickets = await eventDataSource.getTickets(eventId: eventId);
+      final tickets = await ticketDataSource.getTickets(eventId: eventId);
 
       final ticketsToEntity =
           tickets.map((ticket) => ticket.toEntity()).toList();
@@ -122,7 +125,8 @@ class EventRepoImpl implements EventRepo {
   @override
   Future<Either<Failure, int>> getGuestTotal({required String eventId}) async {
     try {
-      final guestsTotal = await eventDataSource.getGuestTotal(eventId: eventId);
+      final guestsTotal =
+          await ticketDataSource.getGuestTotal(eventId: eventId);
 
       Log.logRepo(
         repoName: runtimeTypeName,
@@ -150,7 +154,7 @@ class EventRepoImpl implements EventRepo {
   }) async {
     try {
       final checkedInGuestsTotal =
-          await eventDataSource.getCheckedInGuestsTotal(
+          await ticketDataSource.getCheckedInGuestsTotal(
         eventId: eventId,
       );
 

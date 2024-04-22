@@ -2,8 +2,8 @@ import 'package:fpdart/fpdart.dart';
 
 import '../../../../core/domain/failures/failures.dart';
 import '../../../../utils/enums/event_type_enum.dart';
+import '../../../ticket/domain/entities/ticket_entity.dart';
 import '../entities/event_entity.dart';
-import '../entities/ticket_entity.dart';
 
 abstract class EventRepo {
   Future<Either<Failure, List<EventEntity>>> getEvents({

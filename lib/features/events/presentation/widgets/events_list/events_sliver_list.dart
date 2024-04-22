@@ -53,8 +53,8 @@ class EventsSliverList extends StatelessWidget {
 
           return EventItem(
             event: eventEntity,
-            onTap: () {
-              RouterFunc.goToEventDetail(
+            onTap: () async {
+              await RouterFunc.goToEventDetailPage(
                 context: context,
                 eventId: eventEntity.eventId,
               );

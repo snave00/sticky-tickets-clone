@@ -2,11 +2,11 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../events/domain/entities/event_entity.dart';
-import '../../../events/domain/entities/ticket_entity.dart';
 import '../../../events/domain/usecases/get_checked_in_guests_total_usecase.dart';
 import '../../../events/domain/usecases/get_event_usecase.dart';
 import '../../../events/domain/usecases/get_guests_total_usecase.dart';
 import '../../../events/domain/usecases/get_tickets_usecase.dart';
+import '../../../ticket/domain/entities/ticket_entity.dart';
 
 part 'event_detail_cubit.freezed.dart';
 part 'event_detail_state.dart';
