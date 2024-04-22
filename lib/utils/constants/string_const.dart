@@ -61,11 +61,9 @@ class StringConst {
   static const String emptyStateIcon4 = '📖';
   static const String emptyStateIcon5 = '🤷‍♂️';
   static const String emptyStateIcon6 = '🤔';
-  static const String noPromosFound = 'No promos found';
-  static const String noProductsFound = 'No products found';
-  static const String noCategoriesFound = 'No categories found';
   static const String noEventsFound = 'No events found';
   static const String noEventFound = 'No event found';
+  static const String noGuestsFound = 'No guests found';
 
   // * Terms & Privacy
   static const String termsPrivacyMessage =
@@ -90,19 +88,9 @@ class StringConst {
   static const String checkedIn = 'Checked In';
   static const String checkedInDesc = 'Number of people who\'ve checked in';
   static const String sales = 'Sales';
-
-  // * Bottom Nav Labels
-  static const String home = 'Home';
-  static const String activity = 'Activity';
-  static const String cart = 'Cart';
-  static const String account = 'Account';
-
-  // * Home
-  static const String popular = 'Popular';
-  static const String promos = 'Promos';
-
-  static const String hotCoffee = 'Hot coffee';
-  static const String icedCoffee = 'Iced coffee';
-  static const String pasta = 'Pasta';
-  static const String bread = 'Bread';
+  static const String venue = 'Venue';
+  static const String date = 'Date';
+  static const String guestHaveNotCheckedIn = 'Guest have not checked in';
+  static const String guestList = 'Guest List';
+  static const String scanTicket = 'Scan ticket';
 }

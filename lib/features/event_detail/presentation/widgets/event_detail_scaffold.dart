@@ -7,9 +7,12 @@ import '../cubit/event_detail_cubit.dart';
 
 class EventDetailScaffold extends StatelessWidget {
   final Widget body;
+  final Widget? floatingActionButton;
+
   const EventDetailScaffold({
     super.key,
     required this.body,
+    this.floatingActionButton,
   });
 
   @override
@@ -40,6 +43,7 @@ class EventDetailScaffold extends StatelessWidget {
             ),
             child: body,
           ),
+          floatingActionButton: floatingActionButton,
         );
       },
     );
