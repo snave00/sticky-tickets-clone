@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../core/presentation/widgets/icon/emoji_icon_widget.dart';
 import '../../../../../../core/presentation/widgets/placeholder/empty_state_text.dart';
-import '../../../../../../core/presentation/widgets/progress/custom_circular_progress.dart';
 import '../../../../../../core/presentation/widgets/spacing/spacing.dart';
 import '../../../../../../utils/constants/string_const.dart';
 import '../../../../../../utils/constants/widget_const.dart';
@@ -11,6 +10,7 @@ import '../../../../../utils/helpers/shared/helper_func.dart';
 import '../../../../ticket/domain/entities/ticket_entity.dart';
 import '../../cubit/event_detail_cubit.dart';
 import 'event_guest_item.dart';
+import 'guest_list_loading.dart';
 
 class EventDetailGuestList extends StatelessWidget {
   const EventDetailGuestList({super.key});
@@ -109,12 +109,7 @@ class EventDetailGuestList extends StatelessWidget {
 
   Widget _buildLoadingState() {
     return const SliverToBoxAdapter(
-      child: Padding(
-        padding: EdgeInsets.all(WidgetPadding.paddingL),
-        child: CustomCircularProgress(
-          progressSize: ProgressSize.medium,
-        ),
-      ),
+      child: GuestListLoading(),
     );
   }
 }

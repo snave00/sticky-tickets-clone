@@ -7,7 +7,7 @@ import '../cubit/event_detail_cubit.dart';
 import '../widgets/event_detail_app_bar.dart';
 import '../widgets/event_detail_guests_total.dart';
 import '../widgets/event_detail_scaffold.dart';
-import '../widgets/event_detail_venue_date.dart';
+import '../widgets/event_detail_venue_date/event_detail_venue_date.dart';
 import '../widgets/event_guest_list/event_detail_guest_list.dart';
 import '../widgets/event_guest_list/event_guest_title.dart';
 import '../widgets/scan_ticket_button.dart';

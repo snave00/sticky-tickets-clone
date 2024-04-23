@@ -50,7 +50,7 @@ class EventDetailCubit extends Cubit<EventDetailState> {
 
   Future<void> refresh() async {
     _resetCheckInOutStatus();
-    await _getEvent();
+    _getEvent();
     _getTickets();
     await _getGuestsTotal();
     await _getCheckedInGuestsTotal();

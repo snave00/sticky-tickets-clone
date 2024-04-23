@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../../../core/presentation/widgets/spacing/spacing.dart';
-import '../../../../utils/constants/string_const.dart';
-import '../../../../utils/constants/widget_const.dart';
-import '../../../../utils/extenstions/date_extension.dart';
-import '../cubit/event_detail_cubit.dart';
+import '../../../../../core/presentation/widgets/spacing/spacing.dart';
+import '../../../../../utils/constants/string_const.dart';
+import '../../../../../utils/constants/widget_const.dart';
+import '../../../../../utils/extenstions/date_extension.dart';
+import '../../../../events/domain/entities/event_entity.dart';
+import '../../cubit/event_detail_cubit.dart';
+import 'event_detail_venue_date_loading.dart';
 
 class EventDetailVenueDate extends StatelessWidget {
   const EventDetailVenueDate({super.key});
@@ -21,33 +23,58 @@ class EventDetailVenueDate extends StatelessWidget {
           final event = state.event;
           final venue = event.venue;
           final dateTime = event.date.formatDateShortTime;
+          final eventDetailStatus = state.eventDetailStatus;
 
-          return Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: WidgetPadding.paddingM,
-              vertical: WidgetPadding.paddingS,
-            ),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    // venue
-                    _buildVenue(theme: theme, venue: venue),
-                    const Spacing.vertical(size: SpacingSize.xs),
+          if (eventDetailStatus == EventDetailStatus.loading) {
+            return _buildLoadingState(theme: theme);
+          }
 
-                    // date
-                    _buildDate(theme: theme, dateTime: dateTime),
-                  ],
-                ),
-                const Spacing.vertical(size: SpacingSize.s),
-                const Divider(thickness: 0.3),
-              ],
-            ),
+          if (event == EventEntity.empty()) {
+            return Container();
+          }
+
+          return _buildLoadedState(
+            theme: theme,
+            venue: venue,
+            dateTime: dateTime,
           );
         },
       ),
     );
+  }
+
+  Widget _buildLoadedState({
+    required ThemeData theme,
+    required String venue,
+    required String dateTime,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: WidgetPadding.paddingM,
+        vertical: WidgetPadding.paddingS,
+      ),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              // venue
+              _buildVenue(theme: theme, venue: venue),
+              const Spacing.vertical(size: SpacingSize.xs),
+
+              // date
+              _buildDate(theme: theme, dateTime: dateTime),
+            ],
+          ),
+          const Spacing.vertical(size: SpacingSize.s),
+          const Divider(thickness: 0.3),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildLoadingState({required ThemeData theme}) {
+    return const VenueDateLoading();
   }
 
   Widget _buildVenue({
