@@ -3,40 +3,49 @@ import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/presentation/cubit/user_cubit.dart';
+import '../../features/event_detail/presentation/cubit/event_detail_cubit.dart';
 import '../../features/events/data/data_source/event_data_source.dart';
 import '../../features/events/data/repositories/event_repo_impl.dart';
 import '../../features/events/domain/repositories/event_repo.dart';
+import '../../features/events/domain/usecases/get_checked_in_guests_total_usecase.dart';
 import '../../features/events/domain/usecases/get_event_usecase.dart';
 import '../../features/events/domain/usecases/get_events_usecase.dart';
+import '../../features/events/domain/usecases/get_guests_total_usecase.dart';
+import '../../features/events/domain/usecases/get_tickets_usecase.dart';
 import '../../features/events/presentation/cubit/cubit/events_cubit.dart';
-import '../../features/home/cubit/home_cubit.dart';
-import '../../features/product/data/data_source/product_mock_data_source.dart';
-import '../../features/product/data/repositories/product_repo_impl.dart';
-import '../../features/product/domain/repositories/product_repo.dart';
-import '../../features/product/domain/usecases/get_product_categories_usecase.dart';
-import '../../features/product/domain/usecases/get_product_usecase.dart';
-import '../../features/product/domain/usecases/get_products_usecase.dart';
-import '../../features/promos/data/data_source/promo_mock_data_source.dart';
-import '../../features/promos/data/repositories/promo_repo_impl.dart';
-import '../../features/promos/domain/repositories/promo_repo.dart';
-import '../../features/promos/domain/usecases/get_promos_usecase.dart';
+import '../../features/ticket/data/data_source/ticket_data_source.dart';
+import '../../features/ticket/data/repositories/ticket_repo_impl.dart';
+import '../../features/ticket/domain/repositories/ticket_repo.dart';
+import '../../features/ticket/domain/usecases/check_in_ticket_usecase.dart';
+import '../../features/ticket/domain/usecases/check_out_ticket_usecase.dart';
+import '../../features/ticket/presentation/cubit/ticket_cubit.dart';
 
 final sl = GetIt.instance;
 
 Future<void> init() async {
   // * CUBITS
   sl.registerFactory(() => UserCubit());
+
   sl.registerFactory(
     () => EventsCubit(
-      getEventUseCase: sl(),
       getEventsUseCase: sl(),
     ),
   );
+
   sl.registerFactory(
-    () => HomeCubit(
-      getProductCategoriesUseCase: sl(),
-      getProductsUseCase: sl(),
-      getPromosUseCase: sl(),
+    () => EventDetailCubit(
+      getEventUseCase: sl(),
+      getTicketsUseCase: sl(),
+      getGuestsTotalUseCase: sl(),
+      getCheckedInGuestsTotalUseCase: sl(),
+      checkInTicketUseCase: sl(),
+      checkOutTicketUseCase: sl(),
+    ),
+  );
+
+  sl.registerFactory(
+    () => TicketCubit(
+      checkInTicketUseCase: sl(),
     ),
   );
 
@@ -45,24 +54,23 @@ Future<void> init() async {
   sl.registerFactory(() => GetEventUseCase(eventRepo: sl()));
   sl.registerFactory(() => GetEventsUseCase(eventRepo: sl()));
 
-  // product
-  sl.registerFactory(() => GetProductUseCase(productRepo: sl()));
-  sl.registerFactory(() => GetProductsUseCase(productRepo: sl()));
-  sl.registerFactory(() => GetProductCategoriesUseCase(productRepo: sl()));
+  // event detail
+  sl.registerFactory(() => GetTicketsUseCase(eventRepo: sl()));
+  sl.registerFactory(() => GetGuestsTotalUseCase(eventRepo: sl()));
+  sl.registerFactory(() => GetCheckedInGuestsTotalUseCase(eventRepo: sl()));
 
-  // promo
-  sl.registerFactory(() => GetPromosUseCase(promoRepo: sl()));
+  // ticket
+  sl.registerFactory(() => CheckInTicketUseCase(ticketRepo: sl()));
+  sl.registerFactory(() => CheckOutTicketUseCase(ticketRepo: sl()));
 
   // * REPOSITORIES
   sl.registerFactory<EventRepo>(() => EventRepoImpl(
         eventDataSource: sl(),
+        ticketDataSource: sl(),
       ));
 
-  sl.registerFactory<PromoRepo>(() => PromoRepoImpl(
-        promoMockDataSource: sl(),
-      ));
-  sl.registerFactory<ProductRepo>(() => ProductRepoImpl(
-        productMockDataSource: sl(),
+  sl.registerFactory<TicketRepo>(() => TicketRepoImpl(
+        ticketDataSource: sl(),
       ));
 
   // * DATA SOURCES
@@ -71,14 +79,10 @@ Future<void> init() async {
       firebaseFirestore: sl(),
     ),
   );
-
-  sl.registerFactory<PromoMockDataSource>(
-    () => PromoMockDataSourceImpl(),
-  );
-
-  // product mock data
-  sl.registerFactory<ProductMockDataSource>(
-    () => ProductMockDataSourceImpl(),
+  sl.registerFactory<TicketDataSource>(
+    () => TicketDataSourceImpl(
+      firebaseFirestore: sl(),
+    ),
   );
 
   // user isar

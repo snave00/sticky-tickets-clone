@@ -145,4 +145,8 @@ class ErrorConst {
   static String youDontHaveAnyActiveSubscription =
       'You don\'t have any active subscription';
   static String noPrevousPurchaseFound = 'No previous purchase found';
+
+  // * Sticky Tickets specific
+  static String ticketAlreadyScanned = 'Ticket has already been scanned';
+  static String ticketNotValid = 'Ticket not valid';
 }

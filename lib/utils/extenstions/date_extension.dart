@@ -30,6 +30,20 @@ extension DateTimeExtension on DateTime {
     }
   }
 
+  String get formatDateShortTime {
+    try {
+      // sample: April 26, 9:00 AM
+      final date = formatDateWithoutYear;
+      final time = DateFormat.jm().format(this);
+      final formatted = '$date, $time';
+      return formatted;
+    } catch (e) {
+      Log.logError(
+          runtimeType.toString(), 'formatDateShortTime ${e.toString()}');
+      return '';
+    }
+  }
+
   String get formatDateDayMonth {
     try {
       // sample: Saturday, April 20

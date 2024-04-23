@@ -27,7 +27,7 @@ class AppBarBackButton extends StatelessWidget {
             color: theme.colorScheme.surfaceVariant,
             borderRadius: const BorderRadius.all(
               Radius.circular(
-                WidgetBorderRadius.border12,
+                WidgetBorderRadius.borderXL,
               ),
             ),
           ),

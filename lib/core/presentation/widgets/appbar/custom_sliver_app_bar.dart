@@ -1,41 +1,67 @@
 import 'package:flutter/material.dart';
 
 import '../../../../utils/constants/widget_const.dart';
+import '../button/app_bar_back_button.dart';
 
-// * This is used for the bottom appbar
-// This solution is to avoid cut on rounded bottom of app bar when scrolling
-// This is used along side with [custom_app_bar.dart]
-// Place it under body:CustomScrollView( slivers:[] )
-class CustomSliverAppBar extends StatelessWidget {
-  final Widget child;
-  final double height;
+class CustomSliverAppBar extends StatelessWidget
+    implements PreferredSizeWidget {
+  final Widget? title;
+  final List<Widget>? actions;
+  final bool hasBackButton;
+  final Color? backgroundColor;
+  final Color? surfaceTintColor;
+  final bool? centerTitle;
+  final double? titleSpacing;
+  final bool? pinned;
+  final bool? floating;
+  final double? expandedHeight;
+  final Widget? flexibleSpace;
+  final PreferredSizeWidget? bottom;
+
+  /// If this is used, showWarningOnBack and pop page won't work.
+  /// You have to implement a custom behaviour for back button
+  final void Function()? customOnBackPressed;
 
   const CustomSliverAppBar({
     super.key,
-    required this.child,
-    required this.height,
+    this.title,
+    this.actions,
+    this.hasBackButton = false,
+    this.customOnBackPressed,
+    this.backgroundColor,
+    this.surfaceTintColor,
+    this.centerTitle,
+    this.titleSpacing,
+    this.pinned,
+    this.floating,
+    this.expandedHeight,
+    this.flexibleSpace,
+    this.bottom,
   });
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
     return SliverAppBar(
+      // change only back button
+      backgroundColor: backgroundColor,
       automaticallyImplyLeading: false,
-      backgroundColor: theme.colorScheme.primary,
-      // floating: true,
-      // pinned: true,
-      // snap: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(WidgetBorderRadius.bottomAppBar),
-          bottomRight: Radius.circular(WidgetBorderRadius.bottomAppBar),
-        ),
-      ),
-      bottom: PreferredSize(
-        preferredSize: Size(double.maxFinite, height),
-        child: child,
-      ),
+      surfaceTintColor: surfaceTintColor,
+      leading: hasBackButton ? const AppBarBackButton() : null,
+      title: title,
+      actions: actions,
+      centerTitle: centerTitle,
+      titleSpacing: titleSpacing,
+      flexibleSpace: flexibleSpace,
+      pinned: pinned ?? false,
+      floating: floating ?? false,
+      expandedHeight: expandedHeight,
+      bottom: bottom,
     );
   }
+
+  @override
+  Size get preferredSize => const Size(
+        double.maxFinite,
+        WidgetSize.appBarHeight,
+      );
 }

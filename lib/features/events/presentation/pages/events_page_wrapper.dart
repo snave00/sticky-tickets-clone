@@ -54,12 +54,6 @@ class EventsPageWrapper extends StatelessWidget {
       case EventsStatus.getEventsSuccess:
         return;
 
-      case EventsStatus.getEventLoading:
-        return;
-
-      case EventsStatus.getEventSuccess:
-        return;
-
       case EventsStatus.failure:
         showSnackBar(
           context: context,
