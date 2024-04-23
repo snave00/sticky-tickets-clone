@@ -10,22 +10,35 @@ class RouterFunc {
     context.goNamed(Pages.initial.routeName);
   }
 
-  static void goToEventsPage({required BuildContext context}) {
-    context.goNamed(Pages.events.routeName);
+  static Future<void> goToEventsPage({required BuildContext context}) async {
+    await context.pushNamed(Pages.events.routeName);
   }
 
-  static void goToShellPage({
+  static Future<void> goToEventDetailPage({
     required BuildContext context,
-    required String shellOrigin,
-  }) {
-    // redirect to home branch.
-    // we can't redirect to shell path bc there's no path for shell itself
-    // bu default if you want to navigate to shell, use the branch path
-    context.goNamed(
-      Pages.home.routeName,
-      queryParameters: <String, String>{
-        RouterConst.shellOrigin: shellOrigin,
-      },
+    required String eventId,
+  }) async {
+    final Map<String, dynamic> queryParameters = <String, dynamic>{
+      RouterConst.eventId: eventId,
+    };
+
+    await context.pushNamed(
+      Pages.eventDetail.routeName,
+      queryParameters: queryParameters,
+    );
+  }
+
+  static Future<void> goToScanTicketPage({
+    required BuildContext context,
+    required String eventId,
+  }) async {
+    final Map<String, dynamic> queryParameters = <String, dynamic>{
+      RouterConst.eventId: eventId,
+    };
+
+    await context.pushNamed(
+      Pages.scanTicket.routeName,
+      queryParameters: queryParameters,
     );
   }
 }

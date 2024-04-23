@@ -18,10 +18,7 @@ class EventEntity with _$EventEntity {
     required final String venue,
     required final DateTime date,
     required final String image,
-    required final String checkedInTotal,
-    required final String guestTotal,
     required final String colorHex,
-    required final List<String> guestList,
     required final DateTime createdAt,
     required final DateTime updatedAt,
   }) = _EventEntity;
@@ -35,10 +32,7 @@ class EventEntity with _$EventEntity {
       venue: '',
       date: DateTimeHelper.getEmptyDateTime(),
       image: '',
-      checkedInTotal: '0',
-      guestTotal: '0',
       colorHex: '',
-      guestList: [],
       createdAt: DateTimeHelper.getEmptyDateTime(),
       updatedAt: DateTimeHelper.getEmptyDateTime(),
     );
@@ -52,10 +46,7 @@ class EventEntity with _$EventEntity {
         venue: venue,
         date: date,
         image: image,
-        checkedInTotal: checkedInTotal,
-        guestTotal: guestTotal,
         colorHex: colorHex,
-        guestList: guestList,
         createdAt: createdAt,
         updatedAt: updatedAt,
       );

@@ -61,10 +61,9 @@ class StringConst {
   static const String emptyStateIcon4 = '📖';
   static const String emptyStateIcon5 = '🤷‍♂️';
   static const String emptyStateIcon6 = '🤔';
-  static const String noPromosFound = 'No promos found';
-  static const String noProductsFound = 'No products found';
-  static const String noCategoriesFound = 'No categories found';
   static const String noEventsFound = 'No events found';
+  static const String noEventFound = 'No event found';
+  static const String noGuestsFound = 'No guests found';
 
   // * Terms & Privacy
   static const String termsPrivacyMessage =
@@ -86,19 +85,24 @@ class StringConst {
   static const String movie = 'Movie';
   static const String food = 'Food';
   static const String comedy = 'Comedy';
+  static const String checkedIn = 'Checked In';
+  static const String checkedInDesc = 'Number of people who\'ve checked in';
+  static const String sales = 'Sales';
+  static const String venue = 'Venue';
+  static const String date = 'Date';
+  static const String guestHaveNotCheckedIn = 'Guest have not checked in';
+  static const String guestList = 'Guest list';
 
-  // * Bottom Nav Labels
-  static const String home = 'Home';
-  static const String activity = 'Activity';
-  static const String cart = 'Cart';
-  static const String account = 'Account';
-
-  // * Home
-  static const String popular = 'Popular';
-  static const String promos = 'Promos';
-
-  static const String hotCoffee = 'Hot coffee';
-  static const String icedCoffee = 'Iced coffee';
-  static const String pasta = 'Pasta';
-  static const String bread = 'Bread';
+  // * Ticket
+  static const String scanTicket = 'Scan ticket';
+  static const String scanTicketSuccess = 'Scan ticket success';
+  static const String ticketId = 'Ticket ID';
+  static const String ticketName = 'Ticket name';
+  static const String guestName = 'Guest name';
+  static const String manualCheckInGuest =
+      'Would you like to manually check in this guest?';
+  static const String manualCheckOutGuest =
+      'Would you like to manually check out this guest?';
+  static const String guestCheckInSuccess = 'Guest check in success';
+  static const String guestCheckOutSuccess = 'Guest check out success';
 }

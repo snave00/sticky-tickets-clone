@@ -1,11 +1,6 @@
-import 'dart:convert';
-import 'dart:isolate';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/services.dart';
 
 import '../../../../modules/firebase/firebase_const.dart';
-import '../../../../utils/constants/asset_const.dart';
 import '../../../../utils/enums/event_type_enum.dart';
 import '../../../../utils/helpers/network/network_handler.dart';
 import '../../../../utils/logs/custom_log.dart';
@@ -14,7 +9,7 @@ import '../models/remote_models/event_model.dart';
 abstract class EventDataSource {
   Future<List<EventModel>> getEvents({required EventType eventType});
 
-  Future<EventModel> getEvent({required String eventId});
+  Future<EventModel?> getEvent({required String eventId});
 }
 
 class EventDataSourceImpl implements EventDataSource {
@@ -43,8 +38,8 @@ class EventDataSourceImpl implements EventDataSource {
           .orderBy(FirebaseConst.date);
     }
 
-    final docUser = await query.get();
-    final data = docUser.docs;
+    final doc = await query.get();
+    final data = doc.docs;
 
     final eventsList = data.map((e) => EventModel.fromJson(e.data())).toList();
 
@@ -54,27 +49,25 @@ class EventDataSourceImpl implements EventDataSource {
   }
 
   @override
-  Future<EventModel> getEvent({required String eventId}) async {
-    final String response = await rootBundle.loadString(
-      AssetConst.productMockData,
-    );
+  Future<EventModel?> getEvent({required String eventId}) async {
+    // internet is required
+    NetworkHandler().checkNetworkConnectivity();
 
-    // get events
-    final events = await Isolate.run(
-      () => getEventsMockData(response),
-    );
+    final collectionRef =
+        firebaseFirestore.collection(FirebaseConst.eventsCollection);
+    final doc = await collectionRef.doc(eventId).get();
+    final data = doc.data();
 
-    // filter by eventId. this mocks the query for your backend
-    final event = events.firstWhere(
-      (element) => element.eventId == eventId,
-    );
+    if (data == null) return null;
 
-    return event;
+    Log.logFireStoreCall(action: 'getEvent', result: data);
+
+    return EventModel.fromJson(data);
   }
 }
 
 // made it top level function so it can be isolated
-Future<List<EventModel>> getEventsMockData(String response) async {
-  final List<dynamic> parsed = jsonDecode(response);
-  return parsed.map((json) => EventModel.fromJson(json)).toList();
-}
+// Future<List<EventModel>> getEventsMockData(String response) async {
+//   final List<dynamic> parsed = jsonDecode(response);
+//   return parsed.map((json) => EventModel.fromJson(json)).toList();
+// }

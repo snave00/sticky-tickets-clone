@@ -5,6 +5,7 @@ Clean Architecture, Flutter Bloc, get_it DI, go_router, feature-first folder str
 ## Getting Started
 
 🤖 Upon **cloning**, 
+- Get the **firebase_options.dart** file and paste it into ```lib/modules/firebase```
 - Get the **configs** folder file and paste it into ```assets/``` for the ```.env``` file
 - Create ```.env.dart``` in ```lib/utils/env```
 - Run ```flutter clean``` & ```flutter pub get```

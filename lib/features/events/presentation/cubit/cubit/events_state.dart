@@ -5,7 +5,6 @@ class EventsState with _$EventsState {
   factory EventsState({
     required EventsStatus eventsStatus,
     required List<EventEntity> events,
-    required EventEntity event,
     required EventType eventType,
     required int selectedEventIndex,
     final String? successMessage,
@@ -17,7 +16,5 @@ enum EventsStatus {
   initial,
   getEventsLoading,
   getEventsSuccess,
-  getEventLoading,
-  getEventSuccess,
   failure,
 }

@@ -7,6 +7,7 @@ import '../../../../../core/presentation/widgets/progress/custom_circular_progre
 import '../../../../../core/presentation/widgets/spacing/spacing.dart';
 import '../../../../../utils/constants/string_const.dart';
 import '../../../../../utils/constants/widget_const.dart';
+import '../../../../../utils/router/router_func.dart';
 import '../../../domain/entities/event_entity.dart';
 import '../../cubit/cubit/events_cubit.dart';
 import 'event_item.dart';
@@ -52,7 +53,12 @@ class EventsSliverList extends StatelessWidget {
 
           return EventItem(
             event: eventEntity,
-            onTap: () {},
+            onTap: () async {
+              await RouterFunc.goToEventDetailPage(
+                context: context,
+                eventId: eventEntity.eventId,
+              );
+            },
           );
         },
       ),

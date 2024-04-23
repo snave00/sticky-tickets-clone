@@ -19,6 +19,7 @@ migrate_working_dir/
 # Dart file
 env.dart
 env.g.dart
+firebase_options.dart
 
 # Auto generated
 *.g.dart

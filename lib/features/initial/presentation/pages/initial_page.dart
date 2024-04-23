@@ -30,6 +30,7 @@ class InitialPage extends StatelessWidget {
 
             // scan new operator
             _buildScanOperatorButton(theme: theme),
+            const Spacing.vertical(size: SpacingSize.s),
           ],
         ),
       ),
@@ -71,8 +72,8 @@ class InitialPage extends StatelessWidget {
           backgroundColor: theme.colorScheme.tertiaryContainer,
           foregroundColor: theme.colorScheme.onTertiaryContainer,
         ),
-        onPressedCallback: () {
-          RouterFunc.goToEventsPage(context: context);
+        onPressedCallback: () async {
+          await RouterFunc.goToEventsPage(context: context);
         },
         child: const Text(StringConst.seeCurrentEvents),
       ),

@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/presentation/widgets/bottom_sheet/custom_bottom_sheet.dart';
 import '../../../core/presentation/widgets/progress/custom_circular_progress.dart';
+import '../../../features/event_detail/presentation/dialogs/manual_check_in_dialog.dart';
+import '../../../features/ticket/domain/entities/ticket_entity.dart';
+import '../../../features/ticket/presentation/bottom_sheet.dart/scan_ticket_result_bottom_sheet.dart';
+import '../../constants/widget_const.dart';
 
 // * Close keyboard or remove current focus node
 void closeKeyboard() {
@@ -18,6 +23,25 @@ Future<void> showProgressDialog({required BuildContext context}) async {
         progressSize: ProgressSize.large,
       );
     },
+  );
+}
+
+// * Shows a alert dialog for manual checked in guest
+Future<void> showManualCheckInDialog({
+  required BuildContext context,
+  required bool isNotCheckedIn,
+  required TicketEntity ticketEntity,
+  required void Function(BuildContext dialogContext) onYesPressed,
+}) async {
+  await showDialog(
+    context: context,
+    builder: (builderContext) => ManualCheckInDialog(
+      isNotCheckedIn: isNotCheckedIn,
+      ticketEntity: ticketEntity,
+      onYesPressed: () {
+        onYesPressed(builderContext);
+      },
+    ),
   );
 }
 
@@ -212,38 +236,6 @@ Future<void> showProgressDialog({required BuildContext context}) async {
 //   }
 // }
 
-// * Shows a custom bottom sheet
-// Future<T?> showCustomBottomSheet<T>({
-//   required BuildContext context,
-//   bool? expand,
-//   double? initialChildSize,
-//   double? maxChildSize,
-//   bool? hasScrollBar,
-//   bool useRootNavigator = false,
-//   // * Put null if you don't want to make it draggable
-//   required Widget Function(
-//     ScrollController? scrollController,
-//   ) scrollView,
-// }) async {
-//   return await showModalBottomSheet(
-//     context: context,
-//     useRootNavigator: useRootNavigator, // to show on top of bottom nav
-//     isScrollControlled: true,
-//     shape: const RoundedRectangleBorder(
-//       borderRadius: BorderRadius.vertical(
-//         top: Radius.circular(WidgetBorder.border20),
-//       ),
-//     ),
-//     builder: (ctx) => CustomBottomSheet(
-//       expand: expand,
-//       initialChildSize: initialChildSize,
-//       maxChildSize: maxChildSize,
-//       hasScrollBar: hasScrollBar,
-//       scrollView: scrollView,
-//     ),
-//   );
-// }
-
 // * Shows a custom list bottom sheet
 // Future<T?> showCustomListBottomSheet<T>({
 //   required BuildContext context,
@@ -276,6 +268,58 @@ Future<void> showProgressDialog({required BuildContext context}) async {
 //       });
 // }
 
+// * Shows a custom bottom sheet
+Future<T?> showCustomBottomSheet<T>({
+  required BuildContext context,
+  bool? expand,
+  double? initialChildSize,
+  double? maxChildSize,
+  bool? hasScrollBar,
+  bool useRootNavigator = false,
+  // * Put null if you don't want to make it draggable
+  required Widget Function(
+    ScrollController? scrollController,
+  ) scrollView,
+}) async {
+  return await showModalBottomSheet(
+    context: context,
+    useRootNavigator: useRootNavigator, // to show on top of bottom nav
+    isScrollControlled: true,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(
+        top: Radius.circular(WidgetBorderRadius.borderL),
+      ),
+    ),
+    builder: (ctx) => CustomBottomSheet(
+      expand: expand,
+      initialChildSize: initialChildSize,
+      maxChildSize: maxChildSize,
+      hasScrollBar: hasScrollBar,
+      scrollView: scrollView,
+    ),
+  );
+}
+
+// * Shows a bottom sheet after scanning ticket
+Future<void> showScanTicketResultBottomSheet({
+  required BuildContext context,
+  required final TicketEntity ticketEntity,
+  required final bool isSuccess,
+  required final String resultMessage,
+}) async {
+  await showCustomBottomSheet(
+    context: context,
+    initialChildSize: isSuccess ? 0.5 : 0.3,
+    scrollView: (scrollController) {
+      return ScanTicketResultBottomSheet(
+        ticketEntity: ticketEntity,
+        isSuccess: isSuccess,
+        resultMessage: resultMessage,
+      );
+    },
+  );
+}
+
 // * Shows a regular snack bar success or fail/error
 void showSnackBar({
   required BuildContext context,
@@ -293,8 +337,7 @@ void showSnackBar({
             color: isSuccess ? Colors.white : theme.colorScheme.onError,
           ),
         ),
-        backgroundColor:
-            isSuccess ? theme.colorScheme.primary : theme.colorScheme.error,
+        backgroundColor: isSuccess ? Colors.green : theme.colorScheme.error,
       ),
     );
 }
@@ -320,5 +363,7 @@ void showSnackBar({
 //     ),
 //   );
 // }
+
+
 
 
