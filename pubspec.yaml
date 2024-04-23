@@ -44,7 +44,7 @@ dependencies:
   flutter_svg: ^2.0.10+1
   cached_network_image: ^3.3.1
   percent_indicator: ^4.2.3
-  mobile_scanner: ^4.0.1
+  # mobile_scanner: ^4.0.1
   
 dev_dependencies:
   flutter_test:
@@ -70,10 +70,8 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     # need to specify the specific folder so it will work
-    - assets/images/svg/
     - assets/images/png/
     - assets/configs/
-    - assets/json/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

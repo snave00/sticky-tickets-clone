@@ -6,7 +6,7 @@ class TicketState with _$TicketState {
     required final ScanTicketStatus scanTicketStatus,
     required final TicketEntity ticketEntity,
     required final String eventId,
-    required final MobileScannerController mobileScannerController,
+    // required final MobileScannerController mobileScannerController,
     required final bool isTorchOn,
     final String? successMessage,
     final String? errorMessage,

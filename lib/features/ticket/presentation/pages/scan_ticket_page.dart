@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mobile_scanner/mobile_scanner.dart';
 
 import '../../../../core/presentation/widgets/appbar/custom_app_bar.dart';
 import '../../../../utils/constants/string_const.dart';
@@ -14,7 +13,7 @@ class ScanTicketPage extends StatelessWidget {
     return BlocBuilder<TicketCubit, TicketState>(
       builder: (ctx, state) {
         final isTorchOn = state.isTorchOn;
-        final mobileScannerController = state.mobileScannerController;
+        // final mobileScannerController = state.mobileScannerController;
 
         return Scaffold(
           appBar: CustomAppBar(
@@ -29,24 +28,24 @@ class ScanTicketPage extends StatelessWidget {
               ),
             ],
           ),
-          body: MobileScanner(
-            controller: mobileScannerController,
-            onDetect: (capture) async {
-              final List<Barcode> barcodes = capture.barcodes;
-              String ticketId = '';
-              // final Uint8List? image = capture.image;
-              for (final barcode in barcodes) {
-                final qrCodeValue = '${barcode.rawValue}';
+          // body: MobileScanner(
+          //   controller: mobileScannerController,
+          //   onDetect: (capture) async {
+          //     final List<Barcode> barcodes = capture.barcodes;
+          //     String ticketId = '';
+          //     // final Uint8List? image = capture.image;
+          //     for (final barcode in barcodes) {
+          //       final qrCodeValue = '${barcode.rawValue}';
 
-                debugPrint('QR Code found: $qrCodeValue');
-                ticketId = qrCodeValue;
-              }
+          //       debugPrint('QR Code found: $qrCodeValue');
+          //       ticketId = qrCodeValue;
+          //     }
 
-              await context
-                  .read<TicketCubit>()
-                  .scanTicket(context: context, ticketId: ticketId);
-            },
-          ),
+          //     await context
+          //         .read<TicketCubit>()
+          //         .scanTicket(context: context, ticketId: ticketId);
+          //   },
+          // ),
         );
       },
     );

@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:mobile_scanner/mobile_scanner.dart';
 
 import '../../domain/entities/ticket_entity.dart';
 import '../../domain/params/scan_ticket_params.dart';
@@ -19,10 +18,10 @@ class TicketCubit extends Cubit<TicketState> {
           scanTicketStatus: ScanTicketStatus.initial,
           ticketEntity: TicketEntity.empty(),
           eventId: '',
-          mobileScannerController: MobileScannerController(
-            detectionSpeed: DetectionSpeed.noDuplicates,
-            facing: CameraFacing.back,
-          ),
+          // mobileScannerController: MobileScannerController(
+          //   detectionSpeed: DetectionSpeed.noDuplicates,
+          //   facing: CameraFacing.back,
+          // ),
           isTorchOn: false,
         ));
 
@@ -68,7 +67,7 @@ class TicketCubit extends Cubit<TicketState> {
   }
 
   Future<void> toggleTorchSwitch(bool isTorchOn) async {
-    await state.mobileScannerController.toggleTorch();
+    // await state.mobileScannerController.toggleTorch();
 
     emit(state.copyWith(
       isTorchOn: isTorchOn,
